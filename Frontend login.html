@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | All Area Shop</title>
+    <style>
+        body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+h1:hover{
+    color: black;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px rgb(48, 47, 47);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],input[type="number"], input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 2px 2px 2px gray;
+}
+
+input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+
+
+.error {
+    color: #d9534f;
+    font-size: 14px;
+}
+        span{
+            color: red;
+        }
+    
+/* All Area Shop account page styling */
+:root{--account-ink:#273247;--account-muted:#777168;--account-line:#e7e2d9;--account-accent:#9a573e}
+html{min-height:100%;background:#f5f2ec}
+body{box-sizing:border-box;min-height:100svh;height:auto;justify-content:center;padding:38px 18px;background:radial-gradient(ellipse at 15% 12%,rgba(205,181,154,.24),transparent 34%),radial-gradient(ellipse at 90% 90%,rgba(115,133,156,.17),transparent 34%),#f5f2ec;color:var(--account-ink)}
+body>h1{margin:0 0 5px;color:#35445b;font:500 clamp(32px,6vw,48px)/1 Georgia,'Times New Roman',serif;letter-spacing:-.045em;text-shadow:none}
+body>p{margin:0 0 24px;color:var(--account-muted);font-size:14px;text-align:center;line-height:1.6}
+form{max-width:440px;padding:clamp(22px,5vw,36px);border:1px solid rgba(255,255,255,.9);border-radius:20px;background:rgba(255,254,250,.88);box-shadow:0 22px 60px rgba(44,48,56,.12),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+form label{margin:0 0 7px;color:#4c5360;font-size:12px;font-weight:700;letter-spacing:.04em}
+form input[type=text],form input[type=number],form input[type=email]{width:100%;min-height:46px;margin:0 0 5px;padding:0 13px;border:1px solid #e2ded7;border-radius:9px;background:#fff;color:#273247;font:15px Arial,sans-serif;transition:border-color .18s ease,box-shadow .18s ease}
+form input:focus{outline:none;border-color:#8290a2;box-shadow:0 0 0 4px rgba(90,111,141,.13)}
+form span{display:block;min-height:19px;margin:0 0 7px;color:#a34335;font-size:12px}
+form input[type=submit]{min-height:47px;margin-top:9px;border-radius:9px;background:#35445b;box-shadow:0 6px 15px rgba(53,68,91,.18);font-weight:700;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+form input[type=submit]:hover{transform:translateY(-1px);background:#465873;box-shadow:0 9px 20px rgba(53,68,91,.23)}
+.login-home{display:inline-flex;align-items:center;gap:7px;margin-top:20px;color:#56647a;font-size:13px;font-weight:700;text-decoration:none}.login-home:hover{color:#25354e;text-decoration:underline}
+@media(max-width:480px){body{padding:26px 14px}form{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+@keyframes login-card-arrive{from{opacity:0;transform:translate3d(0,18px,0) scale(.99)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+body>h1,body>p{animation:login-card-arrive .55s cubic-bezier(.2,.72,.25,1) both}
+body>p{animation-delay:.06s}
+form{animation:login-card-arrive .7s .12s cubic-bezier(.2,.72,.25,1) both}
+.login-home{animation:login-card-arrive .5s .2s cubic-bezier(.2,.72,.25,1) both}
+@media(prefers-reduced-motion:reduce){body>h1,body>p,form,.login-home{animation:none!important}}
+input[type="file"],select{width:100%;min-height:44px;margin:7px 0 12px;padding:10px 12px;border:1px solid #ddd7ce;border-radius:9px;background:#fff;color:#35445b;font:14px Arial,sans-serif}.location-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;margin:8px 0 18px;padding:14px;border:1px solid #e3ddd4;border-radius:11px}.location-fields legend{padding:0 6px;color:#35445b;font-weight:700}.location-fields legend span{color:#82786f;font-size:12px;font-weight:400}.location-fields label{margin-top:8px;font-size:13px}.location-fields input{width:100%;min-height:42px;margin:5px 0 8px;padding:9px 11px;border:1px solid #ddd7ce;border-radius:8px;background:#fff;color:#35445b;font:14px Arial,sans-serif}@media(max-width:520px){.location-fields{grid-template-columns:1fr}}#photo-preview{width:76px;height:76px;object-fit:cover;border-radius:50%;border:3px solid white;box-shadow:0 3px 14px #26354b22}
+</style>
+</head>
+<body>
+    <h1>All Area Shop</h1>
+    <p>Sign in to save your profile details</p>
+    <form onsubmit= "return submitForm()">
+        <label for="na">Name:  </label>
+        <input type="text" id="na" placeholder="Enter your Name"><br>
+        <span id="s1"></span><br>
+        <label for="nu">Number:</label>
+        <input type="number" id="nu" placeholder="Enter your Number"><br>
+        <span id="s2"></span><br>
+        <label for="ma">E-mail:</label>
+        <input type="email" id="ma" placeholder="Enter your E-mail"><br>
+        <span id="s3"></span><br>
+        <label for="gender">Gender:</label>
+        <select id="gender" required><option value="">Choose your gender</option><option value="Woman">Woman</option><option value="Man">Man</option><option value="Non-binary">Non-binary</option><option value="Prefer not to say">Prefer not to say</option></select><br>
+        <label for="photo">Profile photo:</label>
+        <input type="file" id="photo" accept="image/*"><br>
+        <img id="photo-preview" alt="Profile photo preview" hidden><br>        <fieldset class="location-fields"><legend>Location details <span>(optional)</span></legend>
+          <label for="address">Street address</label><input id="address" type="text" autocomplete="street-address" placeholder="Street, building, apartment">
+          <label for="city">City / Town</label><input id="city" type="text" autocomplete="address-level2" placeholder="City or town">
+          <label for="region">State / Region</label><input id="region" type="text" autocomplete="address-level1" placeholder="State or region">
+          <label for="postal">Postal code</label><input id="postal" type="text" autocomplete="postal-code" placeholder="Postal code">
+          <label for="country">Country</label><input id="country" type="text" autocomplete="country-name" placeholder="Country">
+        </fieldset>
+        <input type="submit">
+    
+    </form>
+    <a class="login-home" href="AA_shop_responsive_media_queries.html">← Back to the shop</a>
+        
+
+
+    </table>
+    
+    <script>
+      let profilePhotoData = '';
+      document.getElementById('photo').addEventListener('change', event => {
+        const file = event.target.files?.[0];
+        const preview = document.getElementById('photo-preview');
+        if (!file) { profilePhotoData = ''; preview.hidden = true; return; }
+        if (!file.type.startsWith('image/')) { event.target.value = ''; return; }
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = new Image();
+          img.onload = () => {
+            const scale = Math.min(1, 320 / Math.max(img.width, img.height));
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.round(img.width * scale));
+            canvas.height = Math.max(1, Math.round(img.height * scale));
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            profilePhotoData = canvas.toDataURL('image/jpeg', 0.78);
+            preview.src = profilePhotoData; preview.hidden = false;
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+      function submitForm(){
+        const name=document.getElementById('na').value.trim(), phone=document.getElementById('nu').value.trim(), email=document.getElementById('ma').value.trim(), gender=document.getElementById('gender').value;
+        const address=document.getElementById('address').value.trim(), city=document.getElementById('city').value.trim(), region=document.getElementById('region').value.trim(), postal=document.getElementById('postal').value.trim(), country=document.getElementById('country').value.trim();
+        document.getElementById('s1').textContent=name?'':'Please enter your name';
+        document.getElementById('s2').textContent=phone&&/^\d{7,15}$/.test(phone)?'':'Enter a valid phone number';
+        document.getElementById('s3').textContent=email?'':'Please enter your email';
+        if(!name||!phone||!/^\d{7,15}$/.test(phone)||!email||!gender)return false;
+        const profile={name,phone,email,gender,photo:profilePhotoData,address,city,region,postal,country};
+        try{localStorage.setItem('allAreaShopProfile',JSON.stringify(profile));}catch(error){}
+        const handoff=new URLSearchParams({name,phone,email,gender,photo:profilePhotoData,address,city,region,postal,country}).toString();
+        window.location.href=`profile.html#profile?${handoff}`;
+        return false;
+      }
+    </script>
+    
+</body>
+</html>
