@@ -989,6 +989,34 @@ body{background:var(--paper)!important;color:var(--ink)}
 }
 .main1>nav a:active h4{background:#d9c2b2!important;color:#302824!important;transform:scale(.97)!important;box-shadow:inset 0 2px 5px rgba(40,30,24,.16)!important}
 .main1>nav a:focus-visible{outline:2px solid #e4c6a5!important;outline-offset:3px;border-radius:999px}
+/* Phone-only slideshow: tactile frame, gentle 3D transitions, and a soft light pass */
+@keyframes phone-slide-glint{0%,58%{transform:translateX(-130%);opacity:0}68%{opacity:.22}86%,100%{transform:translateX(130%);opacity:0}}
+@keyframes phone-frame-pulse{0%,100%{box-shadow:0 18px 42px rgba(74,53,40,.2),inset 0 0 0 1px rgba(255,255,255,.22)}50%{box-shadow:0 22px 48px rgba(74,53,40,.27),inset 0 0 0 1px rgba(255,255,255,.38)}}
+@media(max-width:600px){
+  .main2{perspective:1200px;background:radial-gradient(ellipse at 50% 48%,#d3bdae 0%,#b8a095 68%,#a98e80 100%)}
+  .hero-slideshow{isolation:isolate;transform-style:preserve-3d;border:1px solid rgba(255,249,241,.66)!important;border-radius:20px!important;box-shadow:0 18px 42px rgba(74,53,40,.2),inset 0 0 0 1px rgba(255,255,255,.22)!important;animation:phone-frame-pulse 7s ease-in-out infinite}
+  .phone-only-slide{backface-visibility:hidden;transform-origin:50% 50%;transform:translate3d(4%,0,-24px) rotateY(-5deg) scale(1.045)!important;filter:brightness(.88) saturate(.92)!important;transition:opacity .72s ease,transform 1.05s cubic-bezier(.2,.72,.25,1),filter 1.05s ease!important}
+  .phone-only-slide.is-active{transform:translate3d(0,0,0) rotateY(0) scale(1)!important;filter:brightness(1) saturate(1)!important}
+  .hero-slideshow::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(108deg,transparent 28%,rgba(255,248,239,.12) 46%,rgba(255,248,239,.25) 50%,rgba(255,248,239,.08) 54%,transparent 72%);transform:translateX(-130%);animation:phone-slide-glint 7.5s ease-in-out infinite}
+  .main2:before{border-color:rgba(255,248,238,.82);box-shadow:0 18px 46px rgba(68,49,37,.18),inset 0 1px 0 rgba(255,255,255,.52)}
+}
+@media(prefers-reduced-motion:reduce){@media(max-width:600px){.hero-slideshow,.hero-slideshow::after{animation:none!important}.phone-only-slide,.phone-only-slide.is-active{transform:none!important;transition:none!important;filter:none!important}}}
+/* Keep the product category bar pinned below the phone header while scrolling */
+@media(max-width:600px){
+  .product-nav{position:sticky!important;top:60px!important;z-index:24!important;scroll-margin-top:66px;margin-top:0;background:rgba(255,253,249,.98)!important;-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);box-shadow:0 8px 22px rgba(63,51,45,.14),inset 0 1px rgba(255,255,255,.9)!important}
+}
+/* Make the phone dropdown an opaque, full-width menu below the header */
+@media(max-width:600px){
+  .main1{position:sticky!important;top:0;overflow:visible!important;isolation:isolate}
+  .main1>nav{position:absolute!important;top:calc(100% + 8px)!important;left:12px!important;right:12px!important;width:auto!important;margin:0!important;padding:8px!important;display:none;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:3px!important;overflow:visible!important;border:1px solid #e5d7cc!important;border-radius:15px!important;background:#f6f0ea!important;box-shadow:0 18px 38px rgba(43,32,26,.24),inset 0 1px #fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;z-index:60!important}
+  .main1.mobile-nav-open>nav{display:flex!important;animation:mobile-menu-drop .2s cubic-bezier(.2,.72,.25,1) both}
+  .main1>nav a{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 auto!important;width:100%!important;min-width:0!important;min-height:46px!important;padding:0 4px!important;border:0!important;border-radius:10px!important;background:transparent!important}
+  .main1>nav h4{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:100%!important;max-width:none!important;min-height:42px!important;padding:10px 12px!important;border-radius:9px!important;color:#493831!important;font-size:12px!important;letter-spacing:.06em!important;white-space:normal!important}
+  .main1>nav a:hover h4,.main1>nav a:focus-visible h4{background:#e9d9ce!important;color:#382c26!important;box-shadow:none!important;transform:none!important}
+  .main1>nav .nav-icon{flex:0 0 17px!important;width:17px!important;height:17px!important;color:#765744!important}
+  .main1>nav .cart-count{background:#d2aa83!important;color:#302824!important}
+  .main1>nav .nav-profile-photo{width:22px!important;height:22px!important}
+}
 </style>
 </head>
 <body>
