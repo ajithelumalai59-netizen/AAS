@@ -896,6 +896,99 @@ body{background:#f7f5f0;color:#252a31}
 .main1>nav a:active h4{box-shadow:none!important}
 /* Hide only the generic person icon beside Profile */
 .profile-nav-default{display:none!important}
+/* Atmospheric motion graphics for the hero and section transitions */
+@keyframes hero-aura-drift{0%{transform:translate3d(0,0,0) scale(.96);opacity:.55}50%{transform:translate3d(-16px,12px,0) scale(1.04);opacity:.9}100%{transform:translate3d(10px,-9px,0) scale(1);opacity:.62}}
+@keyframes hero-ring-turn{from{transform:rotate(0deg) scale(.96)}to{transform:rotate(360deg) scale(1.04)}}
+@keyframes hero-frame-breathe{0%,100%{border-color:rgba(255,248,237,.24);box-shadow:inset 0 0 0 1px rgba(104,77,59,.08),0 0 0 rgba(232,178,146,0)}50%{border-color:rgba(255,235,218,.44);box-shadow:inset 0 0 0 1px rgba(104,77,59,.1),0 0 24px rgba(232,178,146,.12)}}
+.hero-copy{isolation:isolate}
+.hero-copy::before{content:"";position:absolute;z-index:-1;top:10%;right:10%;width:clamp(150px,24vw,340px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 36%,rgba(239,196,165,.2),rgba(239,196,165,.07) 44%,transparent 72%);filter:blur(2px);pointer-events:none;animation:hero-aura-drift 12s ease-in-out infinite alternate}
+.hero-copy::after{content:"";position:absolute;z-index:-1;top:17%;right:14%;width:clamp(120px,17vw,240px);aspect-ratio:1;border:1px solid rgba(255,246,235,.2);border-radius:50%;box-shadow:inset 0 0 24px rgba(255,246,235,.045),0 0 18px rgba(239,196,165,.06);pointer-events:none;animation:hero-ring-turn 32s linear infinite alternate}
+.main2:after{animation:hero-frame-breathe 8s ease-in-out infinite}
+.shop-heading::after{content:"";display:block;width:clamp(56px,8vw,100px);height:2px;margin-top:22px;border-radius:2px;background:linear-gradient(90deg,#a9533d,#d6ad7c,transparent);transform:scaleX(0);transform-origin:left;transition:transform .85s cubic-bezier(.2,.72,.25,1)}
+.shop-heading.motion-enter.is-inview::after{transform:scaleX(1)}
+@media(max-width:600px){.hero-copy::before{top:18%;right:2%;width:180px;opacity:.52}.hero-copy::after{top:24%;right:8%;width:135px;opacity:.42}}
+@media(prefers-reduced-motion:reduce){.hero-copy::before,.hero-copy::after,.main2:after{animation:none!important}.shop-heading::after{transform:scaleX(1);transition:none!important}}
+/* Motion design for the product category filter bar */
+@keyframes category-bar-arrive{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes category-chip-arrive{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes category-chip-select{0%{transform:scale(.94)}65%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes category-chip-sheen{0%{opacity:0;transform:translateX(-140%)}25%{opacity:.45}100%{opacity:0;transform:translateX(140%)}}
+.product-nav.motion-ready:not(.motion-in){opacity:0;transform:translateY(16px)}
+.product-nav.motion-in{animation:category-bar-arrive .65s cubic-bezier(.2,.72,.25,1) both}
+.product-nav button{position:relative;overflow:hidden;isolation:isolate;transition:transform .25s cubic-bezier(.2,.72,.25,1),box-shadow .25s ease,background .25s ease,color .25s ease}
+.product-nav button::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.48) 50%,transparent 80%);transform:translateX(-140%);opacity:0}
+.product-nav.motion-in button{animation:category-chip-arrive .48s cubic-bezier(.2,.72,.25,1) both}
+.product-nav.motion-in button:nth-child(2){animation-delay:.045s}.product-nav.motion-in button:nth-child(3){animation-delay:.09s}.product-nav.motion-in button:nth-child(4){animation-delay:.135s}.product-nav.motion-in button:nth-child(5){animation-delay:.18s}.product-nav.motion-in button:nth-child(6){animation-delay:.225s}.product-nav.motion-in button:nth-child(7){animation-delay:.27s}.product-nav.motion-in button:nth-child(8){animation-delay:.315s}.product-nav.motion-in button:nth-child(9){animation-delay:.36s}.product-nav.motion-in button:nth-child(10){animation-delay:.405s}
+.product-nav button[aria-pressed="true"]{animation:category-chip-select .42s cubic-bezier(.2,.72,.25,1) both}
+.product-nav button[aria-pressed="true"]::after{animation:category-chip-sheen .8s ease-out both}
+@media(hover:hover){.product-nav button:hover{transform:translateY(-2px);box-shadow:0 5px 13px rgba(53,68,91,.14)}.product-nav button[aria-pressed="true"]:hover{transform:translateY(-1px)}}
+.product-nav button:active{transform:scale(.96)}
+@media(prefers-reduced-motion:reduce){.product-nav.motion-ready:not(.motion-in){opacity:1;transform:none}.product-nav.motion-in,.product-nav.motion-in button,.product-nav button[aria-pressed="true"],.product-nav button[aria-pressed="true"]::after{animation:none!important}.product-nav button,.product-nav button:hover,.product-nav button:active{transform:none!important;transition:none!important}}
+/* Design-taste pass: accessible filter focus, system dark theme, and opaque glass fallback */
+.product-nav button:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
+@media(prefers-reduced-transparency:reduce){
+  .main1,.main1>nav,.product-nav,.mobile-nav-toggle{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .main1{background:#302824!important}
+  .main1>nav{background:#463a34!important;border-color:#79655b!important}
+  .product-nav{background:#fffdfa!important;border-color:#e8e1d8!important}
+  .mobile-nav-toggle{background:#604c40!important}
+}
+@media(prefers-color-scheme:dark){
+  :root{color-scheme:dark;--paper:#1f1b18;--ink:#f2e9e1;--muted:#b9aaa0;--terracotta:#d58b6d;--line:#453a34;--card:#29231f}
+  body{background:var(--paper)!important;color:var(--ink)}
+  .main3{background:var(--paper)}
+  .shop-heading h2,.product-info strong,.product-price,.product-cta{color:var(--ink)!important}
+  .shop-heading p{color:var(--muted)!important}
+  .shop-heading>span,.product-category{color:#d58b6d!important}
+  .m3{background:var(--card)!important;border-color:var(--line)!important;box-shadow:0 8px 22px rgba(0,0,0,.24)!important}
+  .m3:hover{border-color:#806553!important;box-shadow:0 18px 34px rgba(0,0,0,.34)!important}
+  .product-price input{background:#342d28!important;border-color:#594a40!important;color:var(--ink)!important}
+  .product-nav{background:rgba(43,37,33,.96)!important;border-color:#594a40!important;box-shadow:0 8px 25px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.05)!important}
+  .product-nav button{color:#e4d9d1!important}
+  .product-nav button:hover{background:#403630!important;color:#fff8f1!important}
+  .product-nav button[aria-pressed="true"]{background:#d6ad7c!important;color:#30241f!important;border-color:#ead2b5!important}
+  .product-nav button:focus-visible{outline-color:#e4b48f}
+  .shop-footer{background:#211d1a!important;border-color:#453a34!important;color:#b9aaa0!important}
+  .shop-footer a,.shop-footer-brand{color:#e9d8c9!important}
+}
+@media(prefers-color-scheme:dark) and (prefers-reduced-transparency:reduce){.product-nav{background:#29231f!important;border-color:#594a40!important}}
+/* Unified warm taupe and cream color palette */
+:root{color-scheme:light;--paper:#f3eee8;--ink:#302824;--muted:#74675f;--terracotta:#98634e;--line:#e3d8ce;--card:#fffdf9;--brand:#59483f}
+body{background:var(--paper)!important;color:var(--ink)}
+.main1{background:rgba(63,51,45,.96)!important;border-bottom-color:rgba(239,221,207,.24)!important}
+.main1 .brand-name{color:#fff8f1!important}
+.main1 .brand-mark{background:#e8d9ce!important;color:#59483f!important}
+.main1>nav{background:rgba(232,217,206,.12)!important;border-color:rgba(241,225,212,.32)!important}
+.main1>nav h4{color:#fff6ee!important}
+.main1>nav a:hover h4,.main1>nav a:focus-visible h4{background:rgba(241,225,212,.18)!important;color:#fffaf5!important}
+.main1>nav .cart-count{background:#d2aa83!important;color:#302824!important}
+.main2{background:#b8a095!important}
+.main3,.cart-page,.profile-page{background:var(--paper)!important;color:var(--ink)}
+.shop-heading h2,.product-info strong,.product-price{color:var(--ink)!important}
+.shop-heading p,.cart-intro,.cart-row p{color:var(--muted)!important}
+.m3,.cart-row,.cart-summary,.profile-card{background:var(--card)!important;border-color:var(--line)!important}
+.product-nav{background:rgba(255,253,249,.96)!important;border-color:#e3d8ce!important}
+.product-nav button{color:#5d534d!important}
+.product-nav button:hover{background:#f0e5dc!important;color:#493b34!important}
+.product-nav button[aria-pressed="true"]{background:#59483f!important;color:#fffaf5!important;border-color:#59483f!important}
+.m3 button,.profile-actions a,.profile-actions button,.cart-summary a{background:#59483f!important;color:#fffaf5!important}
+.m3 button:hover,.profile-actions a:hover,.profile-actions button:hover,.cart-summary a:hover{background:#765744!important}
+.product-price input,.profile-field{background:#f7f2ed!important;border-color:#e3d8ce!important;color:#302824!important}
+.product-cta,.cart-remove{color:#98634e!important}
+.shop-footer{background:#3f332d!important;border-color:#59483f!important;color:#eadbd0!important}
+.shop-footer a,.shop-footer-brand{color:#fff5eb!important}
+.mobile-nav-toggle{background:#59483f!important;border-color:#897466!important}
+.mobile-nav-toggle span{background:#fff8f1!important}
+/* Clear, consistent hover feedback across every navbar link */
+.main1>nav a h4{transition:background .22s ease,color .22s ease,transform .22s ease,box-shadow .22s ease}
+@media(hover:hover){
+  .main1>nav a:hover h4,.main1>nav a:focus-visible h4{background:#efe1d8!important;color:#43352e!important;box-shadow:0 4px 12px rgba(20,14,11,.18),inset 0 1px rgba(255,255,255,.72)!important;transform:translateY(-2px)!important}
+  .main1>nav a:hover .nav-icon,.main1>nav a:focus-visible .nav-icon{transform:scale(1.08)!important;color:#805a46!important}
+  .main1>nav a:hover .nav-profile-photo{transform:scale(1.06)!important;box-shadow:0 0 0 2px #d6ad7c!important}
+  .main1>nav a:hover .cart-count,.main1>nav a:focus-visible .cart-count{transform:scale(1.08)!important;background:#805a46!important;color:#fffaf5!important;box-shadow:0 2px 8px rgba(20,14,11,.2)!important}
+}
+.main1>nav a:active h4{background:#d9c2b2!important;color:#302824!important;transform:scale(.97)!important;box-shadow:inset 0 2px 5px rgba(40,30,24,.16)!important}
+.main1>nav a:focus-visible{outline:2px solid #e4c6a5!important;outline-offset:3px;border-radius:999px}
 </style>
 </head>
 <body>
@@ -923,21 +1016,21 @@ body{background:#f7f5f0;color:#252a31}
     <section class="main2" aria-label="Featured home and living video">
         <div class="hero-copy"><span>CURATED FOR YOUR HOME</span><h2>Make room for better living.</h2><p>Comfort, function and thoughtful finds for every corner.</p></div>
         <div class="hero-slideshow" id="hero-slideshow" role="region" aria-label="Featured home and living images" aria-roledescription="carousel">
-    <img class="hero-slide desktop-slide is-active" src="assets/hero-slides/1.webp" alt="Home and living interior photo 1" loading="eager" fetchpriority="high" aria-hidden="false">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/2.webp" alt="Home and living interior photo 2" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/3.webp" alt="Home and living interior photo 3" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/4.webp" alt="Home and living interior photo 4" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/5.webp" alt="Home and living interior photo 5" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/6.webp" alt="Home and living interior photo 6" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/7.webp" alt="Home and living interior photo 7" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/8.webp" alt="Home and living interior photo 8" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/9.webp" alt="Home and living interior photo 9" loading="eager" aria-hidden="true">
-    <img class="hero-slide desktop-slide" src="assets/hero-slides/10.webp" alt="Home and living interior photo 10" loading="eager" aria-hidden="true">
-    <img class="hero-slide phone-only-slide is-active" src="assets/phone-slides/1.webp" alt="Phone home and living slide 1" loading="eager" fetchpriority="high" aria-hidden="false">
-    <img class="hero-slide phone-only-slide" src="assets/phone-slides/2.webp" alt="Phone home and living slide 2" loading="eager" aria-hidden="true">
-    <img class="hero-slide phone-only-slide" src="assets/phone-slides/3.webp" alt="Phone home and living slide 3" loading="eager" aria-hidden="true">
-    <img class="hero-slide phone-only-slide" src="assets/phone-slides/4.webp" alt="Phone home and living slide 4" loading="eager" aria-hidden="true">
-    <img class="hero-slide phone-only-slide" src="assets/phone-slides/5.webp" alt="Phone home and living slide 5" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide is-active" src="1.png" alt="Home and living interior photo 1" loading="eager" fetchpriority="high" aria-hidden="false">
+    <img class="hero-slide desktop-slide" src="2.png" alt="Home and living interior photo 2" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="3.png" alt="Home and living interior photo 3" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="4.png" alt="Home and living interior photo 4" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="5.png" alt="Home and living interior photo 5" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="6.png" alt="Home and living interior photo 6" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="7.png" alt="Home and living interior photo 7" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="8.png" alt="Home and living interior photo 8" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="9.png" alt="Home and living interior photo 9" loading="eager" aria-hidden="true">
+    <img class="hero-slide desktop-slide" src="10.png" alt="Home and living interior photo 10" loading="eager" aria-hidden="true">
+    <img class="hero-slide phone-only-slide is-active" src="1 phone.png" alt="Phone home and living slide 1" loading="eager" fetchpriority="high" aria-hidden="false">
+    <img class="hero-slide phone-only-slide" src="2 phone.png" alt="Phone home and living slide 2" loading="eager" aria-hidden="true">
+    <img class="hero-slide phone-only-slide" src="3 phone.png" alt="Phone home and living slide 3" loading="eager" aria-hidden="true">
+    <img class="hero-slide phone-only-slide" src="4 phone.png" alt="Phone home and living slide 4" loading="eager" aria-hidden="true">
+    <img class="hero-slide phone-only-slide" src="5 phone.png" alt="Phone home and living slide 5" loading="eager" aria-hidden="true">
 </div>
     </section>
 
@@ -1142,6 +1235,18 @@ const productCards = Array.from(productGridForCatalog.querySelectorAll(":scope >
     card.dataset.productCategory = card.querySelector(".product-category")?.textContent.trim().toLowerCase() || "";
   });
   const productCategoryNav = document.querySelector(".product-nav");
+  if (productCategoryNav && "IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    productCategoryNav.classList.add("motion-ready");
+    const categoryNavObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("motion-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    categoryNavObserver.observe(productCategoryNav);
+  }
   productCategoryNav?.addEventListener("click", (event) => {
     const filterButton = event.target.closest("button[data-filter]");
     if (!filterButton) return;
