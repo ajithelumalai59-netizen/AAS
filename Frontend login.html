@@ -100,6 +100,20 @@ form{animation:login-card-arrive .7s .12s cubic-bezier(.2,.72,.25,1) both}
 .login-home{animation:login-card-arrive .5s .2s cubic-bezier(.2,.72,.25,1) both}
 @media(prefers-reduced-motion:reduce){body>h1,body>p,form,.login-home{animation:none!important}}
 input[type="file"],select{width:100%;min-height:44px;margin:7px 0 12px;padding:10px 12px;border:1px solid #ddd7ce;border-radius:9px;background:#fff;color:#35445b;font:14px Arial,sans-serif}.location-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;margin:8px 0 18px;padding:14px;border:1px solid #e3ddd4;border-radius:11px}.location-fields legend{padding:0 6px;color:#35445b;font-weight:700}.location-fields legend span{color:#82786f;font-size:12px;font-weight:400}.location-fields label{margin-top:8px;font-size:13px}.location-fields input{width:100%;min-height:42px;margin:5px 0 8px;padding:9px 11px;border:1px solid #ddd7ce;border-radius:8px;background:#fff;color:#35445b;font:14px Arial,sans-serif}@media(max-width:520px){.location-fields{grid-template-columns:1fr}}#photo-preview{width:76px;height:76px;object-fit:cover;border-radius:50%;border:3px solid white;box-shadow:0 3px 14px #26354b22}
+/* Phone layout: comfortable form controls and room for the on-screen keyboard */
+html{min-height:100%;background:#f3eee8}
+body{min-height:100svh;height:auto;padding:30px 16px max(24px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 15% 10%,rgba(205,181,154,.25),transparent 36%),#f3eee8}
+body>h1{font-size:clamp(32px,9vw,42px)}
+body>p{max-width:32ch;margin-bottom:18px;padding-inline:8px}
+form{width:min(100%,460px);padding:clamp(19px,6vw,28px);border:1px solid #e3d8ce;border-radius:18px;background:#fffdf9;box-shadow:0 16px 42px rgba(63,51,45,.12)}
+form input[type=text],form input[type=number],form input[type=email],form input[type=file],form select,form .location-fields input{font-size:16px}
+form input[type=text],form input[type=number],form input[type=email]{min-height:46px}
+form input[type=submit]{min-height:48px;margin-top:7px;background:#59483f}
+form input[type=submit]:hover{background:#765744}
+.location-fields{grid-template-columns:1fr;gap:0;margin-top:12px;padding:12px}
+#photo-preview{margin:8px 0}
+.login-home{min-height:44px;justify-content:center;margin-top:12px;padding:8px 12px}
+@media(max-width:390px){body{padding:22px 12px max(20px,env(safe-area-inset-bottom))}form{padding:18px 15px}.location-fields{padding:10px}}
 </style>
 </head>
 <body>
