@@ -1,6 +1,687 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Cart | All Area Shop</title><style>
-:root{--ink:#28241f;--muted:#777168;--navy:#35445b;--line:#e8e3da;--paper:#f7f5f0;--card:#fffdfa}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Arial,sans-serif}.topbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(20px,5vw,72px);border-bottom:1px solid #41392f19;background:#fffdfae0;backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:11px;color:var(--navy);text-decoration:none;font:28px Georgia,serif}.mark{display:grid;place-items:center;width:38px;height:38px;border-radius:9px;background:white;color:var(--navy);font:bold 13px/1 Georgia,serif;box-shadow:0 4px 14px #28384f15}.back{color:var(--navy);font-weight:700;text-decoration:none}.page{width:min(1200px,100%);min-height:70vh;margin:auto;padding:clamp(48px,7vw,82px) clamp(20px,5vw,72px) 90px}.eyebrow{color:#a9533d;font-size:11px;font-weight:700;letter-spacing:.2em}h1{margin:12px 0;color:var(--ink);font:500 clamp(36px,5vw,56px)/1.05 Georgia,serif;letter-spacing:-.04em}.intro{margin:0 0 30px;color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:24px;align-items:start}.items{display:grid;gap:12px}.row{display:grid;grid-template-columns:94px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:0 3px 12px #25221c09;animation:arrive .35s ease both}.row img{width:94px;height:82px;border-radius:9px;object-fit:cover;background:#eee9e1}.row h2{margin:0 0 6px;font:500 17px/1.2 Georgia,serif}.row p{margin:0;color:var(--muted);font-size:13px}.total{font-weight:700;white-space:nowrap}.controls{display:flex;align-items:center;gap:8px;margin-top:10px}.controls button{min-width:32px;height:32px;border:1px solid var(--line);border-radius:7px;background:white;color:var(--ink);font-size:17px;cursor:pointer}.controls input{width:50px;height:32px;text-align:center;border:1px solid var(--line);border-radius:7px}.controls .remove{margin-left:5px;padding:0 9px;color:#a9533d;font-size:12px}.summary{position:sticky;top:92px;padding:22px;border:1px solid var(--line);border-radius:15px;background:var(--card);box-shadow:0 8px 24px #25221c0d}.summary h2{margin:0 0 20px;font:500 22px Georgia,serif}.summary p{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #eee9e1;color:#625d55}.summary p strong{color:var(--ink)}.summary .grand{font-size:17px}.summary a{display:flex;justify-content:center;margin-top:18px;padding:12px;border-radius:9px;background:var(--navy);color:white;text-decoration:none;font-weight:700}.empty{padding:40px 20px;border:1px dashed #d6cdc2;border-radius:12px;color:var(--muted);text-align:center;background:var(--card)}footer{padding:22px;text-align:center;color:var(--muted);font-size:12px}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:700px){.layout{grid-template-columns:1fr}.summary{position:static}.row{grid-template-columns:72px minmax(0,1fr);gap:10px;padding:11px}.row img{grid-row:span 2;width:72px;height:72px}.row h2{font-size:15px}.total{grid-column:2;justify-self:start;font-size:13px}.controls{flex-wrap:wrap;gap:6px}.controls button{min-width:36px;height:36px}.controls input{width:44px;height:36px}.remove{min-height:36px}.summary{padding:18px}.brand{font-size:24px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-.checkout{margin-top:28px;padding:clamp(20px,3vw,30px);border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px #25221c0a}.checkout h2{margin:0 0 6px;font:500 26px Georgia,serif}.checkout-intro{margin:0 0 22px;color:var(--muted);font-size:13px}.checkout-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.checkout-field{display:grid;gap:6px}.checkout-field.full{grid-column:1/-1}.checkout-field label{color:#625d55;font-size:12px;font-weight:700}.checkout-field input{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:14px Arial,sans-serif}.payment-title{margin:24px 0 10px;font:500 19px Georgia,serif}.payment-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.payment-option{display:flex;align-items:center;gap:9px;min-height:50px;padding:12px;border:1px solid var(--line);border-radius:9px;background:#fff;cursor:pointer}.payment-option:has(input:checked){border-color:#876553;background:#f4ede8;box-shadow:0 0 0 2px rgba(135,101,83,.1)}.payment-option input{accent-color:#6f5143}.payment-note{margin:10px 0 0;color:var(--muted);font-size:12px}.place-order{width:100%;min-height:48px;margin-top:20px;border:0;border-radius:9px;background:#35445b;color:#fff;font-weight:700;cursor:pointer;transition:transform .18s ease,background .18s ease}.place-order:hover{transform:translateY(-1px);background:#465873}.checkout-status{min-height:22px;margin:12px 0 0;color:#4a6855;font-size:13px;font-weight:700}.checkout-status:empty{display:none}@media(max-width:700px){.checkout-fields,.payment-options{grid-template-columns:1fr}.checkout-field.full{grid-column:auto}}
-.upi-details{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;padding:14px;border:1px solid #ddcfc5;border-radius:10px;background:#f4ede8}.upi-details[hidden]{display:none}.upi-details>div{display:grid;gap:4px;margin-right:auto}.upi-label{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.upi-details code{color:#493831;font:700 15px Arial,sans-serif}.copy-upi,.upi-pay{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 13px;border:1px solid #6f5143;border-radius:7px;background:#6f5143;color:white;font:700 12px Arial,sans-serif;text-decoration:none;cursor:pointer}.copy-upi{background:transparent;color:#493831}
-</style></head><body><header class="topbar"><a class="brand" href="AA_shop_responsive_media_queries.html"><span class="mark">A A<br>A S</span><span>All Area Shop</span></a><a class="back" href="AA_shop_responsive_media_queries.html#products">← Continue shopping</a></header><main class="page"><span class="eyebrow">YOUR SELECTION</span><h1>Shopping cart</h1><p class="intro">Review your items and adjust quantities before you continue shopping.</p><div class="layout"><div class="items" id="cart-items" aria-live="polite"></div><aside class="summary"><h2>Order summary</h2><p><span>Items</span><strong id="cart-summary-count">0</strong></p><p class="grand"><span>Subtotal</span><strong id="cart-subtotal">₹0</strong></p><a href="AA_shop_responsive_media_queries.html#products">Continue shopping</a></aside></div><section class="checkout" aria-labelledby="checkout-title"><h2 id="checkout-title">Delivery &amp; payment details</h2><p class="checkout-intro">Add a delivery address and choose how you would like to pay.</p><form id="checkout-form"><div class="checkout-fields"><div class="checkout-field"><label for="checkout-name">Full name</label><input id="checkout-name" name="name" autocomplete="name" required></div><div class="checkout-field"><label for="checkout-phone">Phone number</label><input id="checkout-phone" name="phone" type="tel" autocomplete="tel" required></div><div class="checkout-field full"><label for="checkout-address">Street address</label><input id="checkout-address" name="address" autocomplete="street-address" required></div><div class="checkout-field"><label for="checkout-city">City / Town</label><input id="checkout-city" name="city" autocomplete="address-level2" required></div><div class="checkout-field"><label for="checkout-region">State / Region</label><input id="checkout-region" name="region" autocomplete="address-level1"></div><div class="checkout-field"><label for="checkout-postal">Postal code</label><input id="checkout-postal" name="postal" autocomplete="postal-code" required></div><div class="checkout-field"><label for="checkout-country">Country</label><input id="checkout-country" name="country" autocomplete="country-name" required></div></div><h3 class="payment-title">Payment method</h3><div class="payment-options"><label class="payment-option"><input type="radio" name="payment" value="UPI" required> UPI</label><label class="payment-option"><input type="radio" name="payment" value="Card"> Credit / debit card</label><label class="payment-option"><input type="radio" name="payment" value="Cash on delivery"> Cash on delivery</label></div><div class="upi-details" id="upi-details" hidden><div><span class="upi-label">Pay to this UPI ID</span><code id="upi-id">7358978015@naviaxis</code></div><button type="button" class="copy-upi" id="copy-upi">Copy UPI ID</button><a class="upi-pay" id="upi-pay" href="upi://pay?pa=7358978015%40naviaxis&amp;pn=All%20Area%20Shop&amp;cu=INR">Open UPI app</a></div><p class="payment-note">Payment is completed in your UPI app. Never enter or share your UPI PIN on this shop page.</p><button class="place-order" type="submit">Continue to place order</button><p class="checkout-status" id="checkout-status" role="status" aria-live="polite"></p></form></section></main><footer>All Area Shop · Thoughtful finds for every corner.</footer>
-<script>(()=>{const key="all-area-shop-cart-v1",list=document.getElementById("cart-items"),count=document.getElementById("cart-summary-count"),subtotal=document.getElementById("cart-subtotal");let cart=[];try{cart=JSON.parse(localStorage.getItem(key)||"[]");if(!Array.isArray(cart))cart=[]}catch{cart=[]}const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const money=v=>`₹${Number(v||0).toLocaleString("en-IN",{maximumFractionDigits:2})}`;function render(){const n=cart.reduce((s,i)=>s+(Number(i.quantity)||0),0),sum=cart.reduce((s,i)=>s+(Number(i.price)||0)*(Number(i.quantity)||0),0);count.textContent=n;subtotal.textContent=money(sum);if(!cart.length){list.innerHTML='<div class="empty"><strong>Your cart is empty.</strong><br>Use “Add to cart” on a product to place it here.</div>';return}list.innerHTML=cart.map(i=>`<article class="row" data-id="${safe(i.id)}"><img src="${safe(i.image)}" alt=""><div><h2>${safe(i.name)}</h2><p>${money(i.price)} each</p><div class="controls"><button type="button" data-action="minus" aria-label="Decrease quantity">−</button><input type="number" min="1" step="1" value="${Math.max(1,Number(i.quantity)||1)}" aria-label="Quantity for ${safe(i.name)}"><button type="button" data-action="plus" aria-label="Increase quantity">+</button><button type="button" class="remove" data-action="remove">Remove</button></div></div><strong class="total">${money(i.price*i.quantity)}</strong></article>`).join("")}function save(){localStorage.setItem(key,JSON.stringify(cart));render();refreshUpiLink()}list.addEventListener("click",e=>{const b=e.target.closest("[data-action]");if(!b)return;const row=b.closest("[data-id]"),item=cart.find(x=>x.id===row.dataset.id);if(!item)return;if(b.dataset.action==="plus")item.quantity++;if(b.dataset.action==="minus")item.quantity=Math.max(1,item.quantity-1);if(b.dataset.action==="remove")cart=cart.filter(x=>x.id!==item.id);save()});list.addEventListener("change",e=>{if(!e.target.matches("input[type=number]"))return;const item=cart.find(x=>x.id===e.target.closest("[data-id]").dataset.id);if(item){item.quantity=Math.max(1,Math.floor(Number(e.target.value)||1));save()}});window.addEventListener("storage",e=>{if(e.key===key){try{cart=JSON.parse(e.newValue||"[]")}catch{cart=[]}render()}});const checkoutForm=document.getElementById("checkout-form"),checkoutStatus=document.getElementById("checkout-status");const upiDetails=document.getElementById("upi-details"),upiPay=document.getElementById("upi-pay"),upiId="7358978015@naviaxis";function refreshUpiLink(){const amount=cart.reduce((sum,item)=>sum+(Number(item.price)||0)*(Number(item.quantity)||0),0);upiPay.href=`upi://pay?pa=${encodeURIComponent(upiId)}&pn=All%20Area%20Shop&am=${amount.toFixed(2)}&cu=INR&tn=All%20Area%20Shop%20order`}document.querySelectorAll("input[name=payment]").forEach(input=>input.addEventListener("change",()=>{upiDetails.hidden=input.value!=="UPI"}));document.getElementById("copy-upi").addEventListener("click",async()=>{try{if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(upiId);else{const field=document.createElement("textarea");field.value=upiId;document.body.appendChild(field);field.select();document.execCommand("copy");field.remove()}document.getElementById("copy-upi").textContent="Copied ✓";setTimeout(()=>document.getElementById("copy-upi").textContent="Copy UPI ID",1300)}catch{document.getElementById("checkout-status").textContent="Copy failed. UPI ID: "+upiId}});try{const profile=JSON.parse(localStorage.getItem("allAreaShopProfile")||"null");if(profile){for(const [field,keyName] of [["checkout-name","name"],["checkout-phone","phone"],["checkout-address","address"],["checkout-city","city"],["checkout-region","region"],["checkout-postal","postal"],["checkout-country","country"]]){const input=document.getElementById(field);if(input&&profile[keyName])input.value=profile[keyName]}}}catch{}checkoutForm.addEventListener("submit",event=>{event.preventDefault();if(!cart.length){checkoutStatus.textContent="Your cart is empty. Add a product before continuing.";return}if(!checkoutForm.reportValidity())return;const method=new FormData(checkoutForm).get("payment");checkoutStatus.textContent=`Delivery details saved for this checkout. Selected payment method: ${method}.`});render();refreshUpiLink()})();</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your Cart | All Area Shop</title>
+    <style>
+      :root {
+        --ink: #28241f;
+        --muted: #777168;
+        --navy: #35445b;
+        --line: #e8e3da;
+        --paper: #f7f5f0;
+        --card: #fffdfa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          15px/1.5 Arial,
+          sans-serif;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px clamp(20px, 5vw, 72px);
+        border-bottom: 1px solid #41392f19;
+        background: #fffdfae0;
+        backdrop-filter: blur(18px);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        color: var(--navy);
+        text-decoration: none;
+        font:
+          28px Georgia,
+          serif;
+      }
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        background: white;
+        color: var(--navy);
+        font:
+          bold 13px/1 Georgia,
+          serif;
+        box-shadow: 0 4px 14px #28384f15;
+      }
+      .back {
+        color: var(--navy);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .page {
+        width: min(1200px, 100%);
+        min-height: 70vh;
+        margin: auto;
+        padding: clamp(48px, 7vw, 82px) clamp(20px, 5vw, 72px) 90px;
+      }
+      .eyebrow {
+        color: #a9533d;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+      }
+      h1 {
+        margin: 12px 0;
+        color: var(--ink);
+        font:
+          500 clamp(36px, 5vw, 56px)/1.05 Georgia,
+          serif;
+        letter-spacing: -0.04em;
+      }
+      .intro {
+        margin: 0 0 30px;
+        color: var(--muted);
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.8fr);
+        gap: 24px;
+        align-items: start;
+      }
+      .items {
+        display: grid;
+        gap: 12px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 94px minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: center;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--card);
+        box-shadow: 0 3px 12px #25221c09;
+        animation: arrive 0.35s ease both;
+      }
+      .row img {
+        width: 94px;
+        height: 82px;
+        border-radius: 9px;
+        object-fit: cover;
+        background: #eee9e1;
+      }
+      .row h2 {
+        margin: 0 0 6px;
+        font:
+          500 17px/1.2 Georgia,
+          serif;
+      }
+      .row p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .total {
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .controls button {
+        min-width: 32px;
+        height: 32px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: white;
+        color: var(--ink);
+        font-size: 17px;
+        cursor: pointer;
+      }
+      .controls input {
+        width: 50px;
+        height: 32px;
+        text-align: center;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+      }
+      .controls .remove {
+        margin-left: 5px;
+        padding: 0 9px;
+        color: #a9533d;
+        font-size: 12px;
+      }
+      .summary {
+        position: sticky;
+        top: 92px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: var(--card);
+        box-shadow: 0 8px 24px #25221c0d;
+      }
+      .summary h2 {
+        margin: 0 0 20px;
+        font:
+          500 22px Georgia,
+          serif;
+      }
+      .summary p {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee9e1;
+        color: #625d55;
+      }
+      .summary p strong {
+        color: var(--ink);
+      }
+      .summary .grand {
+        font-size: 17px;
+      }
+      .summary a {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        padding: 12px;
+        border-radius: 9px;
+        background: var(--navy);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .empty {
+        padding: 40px 20px;
+        border: 1px dashed #d6cdc2;
+        border-radius: 12px;
+        color: var(--muted);
+        text-align: center;
+        background: var(--card);
+      }
+      footer {
+        padding: 22px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      @keyframes arrive {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 700px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .summary {
+          position: static;
+        }
+        .row {
+          grid-template-columns: 72px minmax(0, 1fr);
+          gap: 10px;
+          padding: 11px;
+        }
+        .row img {
+          grid-row: span 2;
+          width: 72px;
+          height: 72px;
+        }
+        .row h2 {
+          font-size: 15px;
+        }
+        .total {
+          grid-column: 2;
+          justify-self: start;
+          font-size: 13px;
+        }
+        .controls {
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .controls button {
+          min-width: 36px;
+          height: 36px;
+        }
+        .controls input {
+          width: 44px;
+          height: 36px;
+        }
+        .remove {
+          min-height: 36px;
+        }
+        .summary {
+          padding: 18px;
+        }
+        .brand {
+          font-size: 24px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      .checkout {
+        margin-top: 28px;
+        padding: clamp(20px, 3vw, 30px);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card);
+        box-shadow: 0 8px 24px #25221c0a;
+      }
+      .checkout h2 {
+        margin: 0 0 6px;
+        font:
+          500 26px Georgia,
+          serif;
+      }
+      .checkout-intro {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .checkout-fields {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .checkout-field {
+        display: grid;
+        gap: 6px;
+      }
+      .checkout-field.full {
+        grid-column: 1/-1;
+      }
+      .checkout-field label {
+        color: #625d55;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .checkout-field input {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          14px Arial,
+          sans-serif;
+      }
+      .payment-title {
+        margin: 24px 0 10px;
+        font:
+          500 19px Georgia,
+          serif;
+      }
+      .payment-options {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .payment-option {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 50px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: #fff;
+        cursor: pointer;
+      }
+      .payment-option:has(input:checked) {
+        border-color: #876553;
+        background: #f4ede8;
+        box-shadow: 0 0 0 2px rgba(135, 101, 83, 0.1);
+      }
+      .payment-option input {
+        accent-color: #6f5143;
+      }
+      .payment-note {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .place-order {
+        width: 100%;
+        min-height: 48px;
+        margin-top: 20px;
+        border: 0;
+        border-radius: 9px;
+        background: #35445b;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          background 0.18s ease;
+      }
+      .place-order:hover {
+        transform: translateY(-1px);
+        background: #465873;
+      }
+      .checkout-status {
+        min-height: 22px;
+        margin: 12px 0 0;
+        color: #4a6855;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .checkout-status:empty {
+        display: none;
+      }
+      @media (max-width: 700px) {
+        .checkout-fields,
+        .payment-options {
+          grid-template-columns: 1fr;
+        }
+        .checkout-field.full {
+          grid-column: auto;
+        }
+      }
+      .upi-details {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px solid #ddcfc5;
+        border-radius: 10px;
+        background: #f4ede8;
+      }
+      .upi-details[hidden] {
+        display: none;
+      }
+      .upi-details > div {
+        display: grid;
+        gap: 4px;
+        margin-right: auto;
+      }
+      .upi-label {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .upi-details code {
+        color: #493831;
+        font:
+          700 15px Arial,
+          sans-serif;
+      }
+      .copy-upi,
+      .upi-pay {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 0 13px;
+        border: 1px solid #6f5143;
+        border-radius: 7px;
+        background: #6f5143;
+        color: white;
+        font:
+          700 12px Arial,
+          sans-serif;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .copy-upi {
+        background: transparent;
+        color: #493831;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="AA_shop_responsive_media_queries.html"
+        ><span class="mark">A A<br />A S</span><span>All Area Shop</span></a
+      ><a class="back" href="https://aashop-5yo8h7oct-ajith735897-1974.vercel.app/#products">← Continue shopping</a>
+    </header>
+    <main class="page">
+      <span class="eyebrow">YOUR SELECTION</span>
+      <h1>Shopping cart</h1>
+      <p class="intro">Review your items and adjust quantities before you continue shopping.</p>
+      <div class="layout">
+        <div class="items" id="cart-items" aria-live="polite"></div>
+        <aside class="summary">
+          <h2>Order summary</h2>
+          <p><span>Items</span><strong id="cart-summary-count">0</strong></p>
+          <p class="grand"><span>Subtotal</span><strong id="cart-subtotal">₹0</strong></p>
+          <a href="AA_shop_responsive_media_queries.html#products">Continue shopping</a>
+        </aside>
+      </div>
+      <section class="checkout" aria-labelledby="checkout-title">
+        <h2 id="checkout-title">Delivery &amp; payment details</h2>
+        <p class="checkout-intro">Add a delivery address and choose how you would like to pay.</p>
+        <form id="checkout-form">
+          <div class="checkout-fields">
+            <div class="checkout-field">
+              <label for="checkout-name">Full name</label
+              ><input id="checkout-name" name="name" autocomplete="name" required />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-phone">Phone number</label
+              ><input id="checkout-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="checkout-field full">
+              <label for="checkout-address">Street address</label
+              ><input id="checkout-address" name="address" autocomplete="street-address" required />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-city">City / Town</label
+              ><input id="checkout-city" name="city" autocomplete="address-level2" required />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-region">State / Region</label
+              ><input id="checkout-region" name="region" autocomplete="address-level1" />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-postal">Postal code</label
+              ><input id="checkout-postal" name="postal" autocomplete="postal-code" required />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-country">Country</label
+              ><input id="checkout-country" name="country" autocomplete="country-name" required />
+            </div>
+          </div>
+          <h3 class="payment-title">Payment method</h3>
+          <div class="payment-options">
+            <label class="payment-option"
+              ><input type="radio" name="payment" value="UPI" required /> UPI</label
+            ><label class="payment-option"
+              ><input type="radio" name="payment" value="Card" /> Credit / debit card</label
+            ><label class="payment-option"
+              ><input type="radio" name="payment" value="Cash on delivery" /> Cash on
+              delivery</label
+            >
+          </div>
+          <div class="upi-details" id="upi-details" hidden>
+            <div>
+              <span class="upi-label">Pay to this UPI ID</span
+              ><code id="upi-id">7358978015@naviaxis</code>
+            </div>
+            <button type="button" class="copy-upi" id="copy-upi">Copy UPI ID</button
+            ><a
+              class="upi-pay"
+              id="upi-pay"
+              href="upi://pay?pa=7358978015%40naviaxis&amp;pn=All%20Area%20Shop&amp;cu=INR"
+              >Open UPI app</a
+            >
+          </div>
+          <p class="payment-note">
+            Payment is completed in your UPI app. Never enter or share your UPI PIN on this shop
+            page.
+          </p>
+          <button class="place-order" type="submit">Continue to place order</button>
+          <p class="checkout-status" id="checkout-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer>All Area Shop · Thoughtful finds for every corner.</footer>
+    <script>
+      (() => {
+        const key = "all-area-shop-cart-v1",
+          list = document.getElementById("cart-items"),
+          count = document.getElementById("cart-summary-count"),
+          subtotal = document.getElementById("cart-subtotal");
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem(key) || "[]");
+          if (!Array.isArray(cart)) cart = [];
+        } catch {
+          cart = [];
+        }
+        const safe = (v) =>
+          String(v ?? "").replace(
+            /[&<>"']/g,
+            (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+          );
+        const money = (v) =>
+          `₹${Number(v || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
+        function render() {
+          const n = cart.reduce((s, i) => s + (Number(i.quantity) || 0), 0),
+            sum = cart.reduce((s, i) => s + (Number(i.price) || 0) * (Number(i.quantity) || 0), 0);
+          count.textContent = n;
+          subtotal.textContent = money(sum);
+          if (!cart.length) {
+            list.innerHTML =
+              '<div class="empty"><strong>Your cart is empty.</strong><br>Use “Add to cart” on a product to place it here.</div>';
+            return;
+          }
+          list.innerHTML = cart
+            .map(
+              (i) =>
+                `<article class="row" data-id="${safe(i.id)}"><img src="${safe(i.image)}" alt=""><div><h2>${safe(i.name)}</h2><p>${money(i.price)} each</p><div class="controls"><button type="button" data-action="minus" aria-label="Decrease quantity">−</button><input type="number" min="1" step="1" value="${Math.max(1, Number(i.quantity) || 1)}" aria-label="Quantity for ${safe(i.name)}"><button type="button" data-action="plus" aria-label="Increase quantity">+</button><button type="button" class="remove" data-action="remove">Remove</button></div></div><strong class="total">${money(i.price * i.quantity)}</strong></article>`,
+            )
+            .join("");
+        }
+        function save() {
+          localStorage.setItem(key, JSON.stringify(cart));
+          render();
+          refreshUpiLink();
+        }
+        list.addEventListener("click", (e) => {
+          const b = e.target.closest("[data-action]");
+          if (!b) return;
+          const row = b.closest("[data-id]"),
+            item = cart.find((x) => x.id === row.dataset.id);
+          if (!item) return;
+          if (b.dataset.action === "plus") item.quantity++;
+          if (b.dataset.action === "minus") item.quantity = Math.max(1, item.quantity - 1);
+          if (b.dataset.action === "remove") cart = cart.filter((x) => x.id !== item.id);
+          save();
+        });
+        list.addEventListener("change", (e) => {
+          if (!e.target.matches("input[type=number]")) return;
+          const item = cart.find((x) => x.id === e.target.closest("[data-id]").dataset.id);
+          if (item) {
+            item.quantity = Math.max(1, Math.floor(Number(e.target.value) || 1));
+            save();
+          }
+        });
+        window.addEventListener("storage", (e) => {
+          if (e.key === key) {
+            try {
+              cart = JSON.parse(e.newValue || "[]");
+            } catch {
+              cart = [];
+            }
+            render();
+          }
+        });
+        const checkoutForm = document.getElementById("checkout-form"),
+          checkoutStatus = document.getElementById("checkout-status");
+        const upiDetails = document.getElementById("upi-details"),
+          upiPay = document.getElementById("upi-pay"),
+          upiId = "7358978015@naviaxis";
+        function refreshUpiLink() {
+          const amount = cart.reduce(
+            (sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+            0,
+          );
+          upiPay.href = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=All%20Area%20Shop&am=${amount.toFixed(2)}&cu=INR&tn=All%20Area%20Shop%20order`;
+        }
+        document.querySelectorAll("input[name=payment]").forEach((input) =>
+          input.addEventListener("change", () => {
+            upiDetails.hidden = input.value !== "UPI";
+          }),
+        );
+        document.getElementById("copy-upi").addEventListener("click", async () => {
+          try {
+            if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(upiId);
+            else {
+              const field = document.createElement("textarea");
+              field.value = upiId;
+              document.body.appendChild(field);
+              field.select();
+              document.execCommand("copy");
+              field.remove();
+            }
+            document.getElementById("copy-upi").textContent = "Copied ✓";
+            setTimeout(
+              () => (document.getElementById("copy-upi").textContent = "Copy UPI ID"),
+              1300,
+            );
+          } catch {
+            document.getElementById("checkout-status").textContent =
+              "Copy failed. UPI ID: " + upiId;
+          }
+        });
+        try {
+          const profile = JSON.parse(localStorage.getItem("allAreaShopProfile") || "null");
+          if (profile) {
+            for (const [field, keyName] of [
+              ["checkout-name", "name"],
+              ["checkout-phone", "phone"],
+              ["checkout-address", "address"],
+              ["checkout-city", "city"],
+              ["checkout-region", "region"],
+              ["checkout-postal", "postal"],
+              ["checkout-country", "country"],
+            ]) {
+              const input = document.getElementById(field);
+              if (input && profile[keyName]) input.value = profile[keyName];
+            }
+          }
+        } catch {}
+        checkoutForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (!cart.length) {
+            checkoutStatus.textContent = "Your cart is empty. Add a product before continuing.";
+            return;
+          }
+          if (!checkoutForm.reportValidity()) return;
+          const method = new FormData(checkoutForm).get("payment");
+          checkoutStatus.textContent = `Delivery details saved for this checkout. Selected payment method: ${method}.`;
+        });
+        render();
+        refreshUpiLink();
+      })();
+    </script>
+  </body>
+</html>
