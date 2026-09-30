@@ -220,6 +220,69 @@ body>form input[type=file]{height:42px;min-height:41px;margin-top:5px}
 body>form input[type=submit]{height:49px;min-height:49px;margin-top:7px}
 @media(max-height:650px){body>form{padding:12px 17px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:35px;min-height:35px}body>form input[type=file]{height:32px;min-height:32px}#photo-preview:not([hidden]){width:38px;height:38px;margin:2px auto}body>form input[type=submit]{height:38px;min-height:38px}}
 @media(max-height:520px){body>form{padding:8px 14px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:29px;min-height:29px}body>form input[type=file]{height:25px;min-height:25px}#photo-preview:not([hidden]){width:27px;height:27px;margin:1px auto}body>form input[type=submit]{height:31px;min-height:31px}}
+/* Phone layout: clear spacing, comfortable tap targets and a balanced card. */
+@media(max-width:600px){
+  body{padding:55px 15px 47px;justify-content:center}
+  body>h1{font-size:clamp(29px,8vw,36px);margin-bottom:5px}
+  body>p{max-width:29ch;margin:0 0 13px;font-size:13px;line-height:1.45}
+  body>form{width:min(100%,390px);max-height:calc(100dvh - 155px);padding:19px 18px;border-radius:19px}
+  body>form label{margin-bottom:4px;font-size:12px}
+  body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:44px;min-height:44px;margin-bottom:2px;padding:0 12px;font-size:16px}
+  body>form span{min-height:15px;margin:0 0 3px;font-size:11px}
+  body>form label[for=photo]{margin-top:4px}
+  body>form input[type=file]{width:100%;height:42px;min-height:42px;margin:4px 0;padding:7px 8px;font-size:12px}
+  body>form input[type=file]::file-selector-button{min-height:26px;margin-right:8px;padding:4px 9px;border:0;border-radius:6px;background:#eee5da;color:#49392e;font-weight:700}
+  #photo-preview:not([hidden]){width:48px;height:48px;margin:3px auto}
+  body>form input[type=submit]{height:46px;min-height:46px;margin-top:5px;font-size:15px}
+  .login-home{min-height:34px;margin-top:8px;font-size:11px}
+  .ambient-brand{top:11px;left:14px;font-size:10px}
+  .motion-replay{right:9px;bottom:8px;padding:8px 10px;font-size:10px}
+}
+@media(max-width:600px) and (max-height:650px){
+  body{padding-top:45px;padding-bottom:39px}
+  body>h1{font-size:28px;margin-bottom:2px}
+  body>p{margin-bottom:7px;font-size:11px}
+  body>form{max-height:calc(100dvh - 125px);padding:11px 15px}
+  body>form label{font-size:10px;margin-bottom:2px}
+  body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:34px;min-height:34px}
+  body>form span{min-height:11px;margin-bottom:1px;font-size:9px}
+  body>form input[type=file]{height:31px;min-height:31px;padding:3px 6px}
+  #photo-preview:not([hidden]){width:34px;height:34px;margin:1px auto}
+  body>form input[type=submit]{height:36px;min-height:36px;margin-top:2px}
+  .login-home{min-height:26px;margin-top:3px;padding:3px 9px;font-size:10px}
+}
+/* Smaller mobile footprint for narrow phone screens. */
+@media(max-width:600px){
+  body>form{width:min(calc(100% - 18px),360px);padding:14px 15px;max-height:calc(100dvh - 145px);border-radius:17px}
+  body>h1{font-size:clamp(27px,7.2vw,33px)}
+  body>p{margin-bottom:9px;font-size:12px}
+  body>form label{font-size:11px;margin-bottom:3px}
+  body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:39px;min-height:39px;font-size:15px}
+  body>form span{min-height:12px;font-size:10px;margin-bottom:2px}
+  body>form input[type=file]{height:36px;min-height:36px;padding:5px 7px;font-size:11px}
+  #photo-preview:not([hidden]){width:40px;height:40px;margin:2px auto}
+  body>form input[type=submit]{height:41px;min-height:41px;font-size:14px}
+  .login-home{min-height:29px;margin-top:5px;padding:4px 10px}
+}
+@media(max-width:390px){body>form{width:min(calc(100% - 20px),340px);padding:12px 13px}.ambient-brand{left:12px}}
+@media(max-width:600px) and (max-height:650px){body>form{width:min(calc(100% - 20px),340px);padding:9px 13px;max-height:calc(100dvh - 118px)}body>h1{font-size:26px}body>p{margin-bottom:5px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:33px;min-height:33px}body>form input[type=file]{height:29px;min-height:29px}#photo-preview:not([hidden]){width:30px;height:30px}body>form input[type=submit]{height:35px;min-height:35px}.login-home{min-height:25px;margin-top:2px}}
+/* Keep the shop-return link inside the visible phone viewport. */
+@media(max-width:600px){
+  body{height:100dvh;min-height:0;padding:47px 12px 62px;justify-content:center;gap:0}
+  body>form{flex:0 1 auto;max-height:calc(100dvh - 178px);margin:0 auto}
+  .login-home{position:relative;z-index:3;display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:34px;margin:7px auto 0;padding:6px 13px}
+  .motion-replay{bottom:5px;right:8px}
+}
+@media(max-width:600px) and (max-height:650px){body{padding-top:42px;padding-bottom:55px}body>form{max-height:calc(100dvh - 155px)}.login-home{min-height:28px;margin-top:3px;padding:4px 11px}}
+/* Mobile: move the shop link into the top bar area so it cannot collide with Submit. */
+@media(max-width:600px){
+  .login-home{position:fixed;z-index:10;top:10px;right:10px;left:auto;bottom:auto;min-height:30px;margin:0;padding:6px 10px;border-color:rgba(255,255,255,.55);background:rgba(42,32,24,.48);font-size:0;line-height:1}
+  .login-home:after{content:"← Shop";font-size:11px;font-weight:700}
+  .ambient-brand{top:10px;left:12px}
+  body{padding-top:56px;padding-bottom:50px}
+  body>form{max-height:calc(100dvh - 165px);margin-bottom:0}
+}
+@media(max-width:360px){.login-home{right:8px;padding-inline:8px}.login-home:after{font-size:10px}.ambient-brand{font-size:9px}.ambient-brand b{width:25px;height:25px}}
 </style>
 </head>
 <body>
@@ -312,6 +375,10 @@ body>form input[type=submit]{height:49px;min-height:49px;margin-top:7px}
     
 </body>
 </html>
+
+
+
+
 
 
 
