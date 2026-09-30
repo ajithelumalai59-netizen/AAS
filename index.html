@@ -1300,6 +1300,12 @@ const productCards = Array.from(productGridForCatalog.querySelectorAll(":scope >
       const savedPrice = localStorage.getItem(storageKey);
       if (savedPrice !== null && savedPrice.trim() !== "") input.value = savedPrice;
       input.addEventListener("input", () => localStorage.setItem(storageKey, input.value));
+      input.addEventListener("change", async () => {
+        const adminKey = localStorage.getItem("aasAdminKey");
+        if (!adminKey) return;
+        try { await fetch(`/api/products/${encodeURIComponent(input.dataset.productPrice)}/price`, { method:"PATCH", headers:{"Content-Type":"application/json","x-admin-key":adminKey}, body:JSON.stringify({price:Number(input.value)}) }); }
+        catch (error) { console.warn("Could not save this price to the shop server.", error); }
+      });
     } catch (error) {
       console.warn("Price saving is unavailable in this browser.", error);
     }
@@ -1373,6 +1379,14 @@ const productCards = Array.from(productGridForCatalog.querySelectorAll(":scope >
     else shoppingCart.push({ id, name, price, image: card.querySelector("img")?.src || "", quantity: 1 });
     saveShoppingCart();
     renderShoppingCart();
+    fetch("/api/cart/items", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({productId:id,quantity:1}) })
+      .then(async response => {
+        if (!response.ok) return;
+        const cartResponse = await fetch("/api/cart", {headers:{Accept:"application/json"}});
+        if (!cartResponse.ok) return;
+        const data = await cartResponse.json();
+        if (Array.isArray(data.items)) { shoppingCart = data.items; saveShoppingCart(); renderShoppingCart(); }
+      }).catch(() => {});
     button.textContent = "Added ✓";
     window.setTimeout(() => { button.textContent = "Add to cart"; }, 1000);
   });
@@ -1398,6 +1412,25 @@ const productCards = Array.from(productGridForCatalog.querySelectorAll(":scope >
     renderShoppingCart();
   });
   renderShoppingCart();
+  const localCartBeforeServer = shoppingCart.map(item => ({...item}));
+  fetch("/api/products", {headers:{Accept:"application/json"}}).then(response => response.ok ? response.json() : null).then(data => {
+    if (!Array.isArray(data?.products)) return;
+    const productsById = new Map(data.products.map(product => [product.id, product]));
+    document.querySelectorAll("[data-product-price]").forEach(input => {
+      const product = productsById.get(input.dataset.productPrice);
+      if (product) input.value = product.price;
+    });
+  }).catch(() => {});
+  fetch("/api/cart", {headers:{Accept:"application/json"}}).then(async response => {
+    if (!response.ok) return;
+    let data = await response.json();
+    if (Array.isArray(data.items) && data.items.length === 0 && localCartBeforeServer.length) {
+      for (const item of localCartBeforeServer) if (item.id) await fetch("/api/cart/items", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({productId:item.id,quantity:Math.max(1,Number(item.quantity)||1)})});
+      const refreshed = await fetch("/api/cart", {headers:{Accept:"application/json"}});
+      if (refreshed.ok) data = await refreshed.json();
+    }
+    if (Array.isArray(data.items)) { shoppingCart = data.items; saveShoppingCart(); renderShoppingCart(); }
+  }).catch(() => {});
   const productGrid = document.querySelector(".main3");
   const productLinks = productGrid ? productGrid.querySelectorAll(":scope > a") : [];
   if (productGrid && productLinks.length && "IntersectionObserver" in window &&
