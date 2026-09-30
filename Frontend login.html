@@ -114,9 +114,117 @@ form input[type=submit]:hover{background:#765744}
 #photo-preview{margin:8px 0}
 .login-home{min-height:44px;justify-content:center;margin-top:12px;padding:8px 12px}
 @media(max-width:390px){body{padding:22px 12px max(20px,env(safe-area-inset-bottom))}form{padding:18px 15px}.location-fields{padding:10px}}
+/* Opening window animation overlay: keeps the existing login page content intact. */
+.window-shutters{position:fixed;z-index:9999;inset:0;display:grid;grid-template-columns:1fr 1fr;perspective:1700px;pointer-events:none;overflow:hidden}
+.window-shutter{position:relative;background:linear-gradient(110deg,#513a29 0%,#805e40 42%,#a17b52 53%,#704e32 100%);box-shadow:inset 0 0 42px rgba(31,19,10,.32);transform-style:preserve-3d;transition:transform 2.1s cubic-bezier(.68,.02,.2,1)}
+.window-shutter:first-child{transform-origin:left center;border-right:7px solid #473222}
+.window-shutter:last-child{transform-origin:right center;border-left:7px solid #473222;background:linear-gradient(250deg,#513a29 0%,#805e40 42%,#a17b52 53%,#704e32 100%)}
+.window-shutter:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 10%,rgba(45,27,14,.14) 10.2%,transparent 10.8% 22%),repeating-linear-gradient(0deg,transparent 0 28%,rgba(255,228,188,.2) 28.2% 29%,transparent 29.2% 31%)}
+.window-shutter:after{content:"";position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:#dfbb7c;box-shadow:inset 0 1px 2px #fff5d4,0 1px 4px #332114}
+.window-shutter:first-child:after{right:14px}.window-shutter:last-child:after{left:14px}
+.window-shutters.is-open .window-shutter:first-child{transform:rotateY(-108deg)}.window-shutters.is-open .window-shutter:last-child{transform:rotateY(108deg)}
+@media(prefers-reduced-motion:reduce){.window-shutters{display:none}}
+/* Refined room scene and coordinated login motion. */
+html{height:100%;background:#382d24}body{position:relative;isolation:isolate;min-height:100svh;height:100svh;overflow:hidden;gap:0;padding:72px 18px 66px;background:#473b30;color:#332b25}
+body:before{content:"";position:fixed;z-index:-3;inset:0;background:linear-gradient(90deg,rgba(23,19,16,.48),rgba(39,29,20,.1) 52%,rgba(24,19,16,.38)),url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2200&q=90') center 55%/cover;filter:brightness(.78) saturate(.88);transform:scale(1.035);animation:room-settle 2.6s cubic-bezier(.2,.7,.2,1) both}
+body:after{content:"";position:fixed;z-index:-2;inset:-20%;pointer-events:none;background:linear-gradient(112deg,transparent 23%,rgba(255,225,178,.04) 36%,rgba(255,226,177,.3) 50%,rgba(255,222,167,.06) 64%,transparent 77%);filter:blur(30px);opacity:0;animation:light-arrive 2.4s ease 1.15s forwards,light-drift 12s ease-in-out 3.6s infinite alternate}
+body>h1{z-index:2;margin:0 0 7px;color:#fffaf0;font:500 clamp(34px,6vw,48px)/1.06 Georgia,'Times New Roman',serif;letter-spacing:-.04em;text-shadow:0 3px 22px rgba(21,16,12,.55);animation:content-rise .75s cubic-bezier(.2,.7,.2,1) 1.2s both}
+body>p{z-index:2;margin:0 0 18px;color:#fff3e3;font-size:14px;line-height:1.55;text-align:center;text-shadow:0 2px 12px rgba(21,16,12,.5);animation:content-rise .75s cubic-bezier(.2,.7,.2,1) 1.36s both}
+body>form{position:relative;z-index:2;max-height:calc(100svh - 220px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;width:min(100%,440px);padding:clamp(22px,4vh,34px);border:1px solid rgba(255,255,255,.72);border-radius:21px;background:rgba(250,247,241,.86);box-shadow:0 28px 90px rgba(24,18,13,.32),inset 0 1px 0 rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);animation:card-arrive .9s cubic-bezier(.2,.72,.2,1) 1.45s both}
+body>form label{display:block;margin:0 0 6px;color:#52473d;font-size:12px;font-weight:700;letter-spacing:.035em}
+body>form input[type=text],body>form input[type=number],body>form input[type=email],body>form input[type=file]{width:100%;min-height:46px;margin:0 0 7px;padding:0 13px;border:1px solid rgba(102,83,64,.22);border-radius:10px;background:rgba(255,255,255,.78);color:#332b25;font:15px 'Trebuchet MS',sans-serif;transition:border-color .2s,box-shadow .2s,transform .2s}
+body>form input:focus{outline:none;border-color:#b88e5c;box-shadow:0 0 0 4px rgba(200,158,98,.17)}
+body>form span{display:block;min-height:18px;margin:0 0 5px;color:#9f493b;font-size:12px}
+body>form input[type=file]{height:auto;padding:10px;background:rgba(255,255,255,.62);font-size:13px}
+#photo-preview{width:72px;height:72px;margin:3px 0 7px;object-fit:cover;border-radius:50%;border:3px solid white;box-shadow:0 5px 18px rgba(55,40,28,.2);animation:photo-pop .35s ease both}
+body>form input[type=submit]{width:100%;min-height:48px;margin-top:7px;border:0;border-radius:10px;background:linear-gradient(110deg,#654832,#8b6542);color:#fffaf2;font-size:15px;font-weight:700;letter-spacing:.025em;box-shadow:0 9px 20px rgba(78,51,31,.23);cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s}
+body>form input[type=submit]:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 13px 25px rgba(78,51,31,.29)}body>form input[type=submit]:active{transform:translateY(0)}
+.login-home{position:relative;z-index:2;min-height:42px;margin-top:13px;padding:9px 14px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(42,32,24,.32);color:#fff7eb;font-size:12px;font-weight:700;text-decoration:none;text-shadow:0 1px 8px #24180f;backdrop-filter:blur(8px);transition:background .2s,transform .2s;animation:content-rise .6s ease 1.7s both}.login-home:hover{background:rgba(42,32,24,.58);transform:translateY(-2px)}
+.ambient-brand{position:fixed;z-index:2;top:22px;left:clamp(18px,4vw,52px);display:flex;align-items:center;gap:9px;color:#fff8eb;font:700 11px 'Trebuchet MS',sans-serif;letter-spacing:.15em;text-transform:uppercase;text-shadow:0 2px 14px #21170f;opacity:0;animation:content-rise .65s ease 1.1s forwards}.ambient-brand b{width:29px;height:29px;display:grid;place-items:center;border:1px solid #fff8ebbb;border-radius:50%;font:18px Georgia,serif;letter-spacing:0}
+.motion-replay{position:fixed;z-index:10001;right:clamp(14px,3vw,38px);bottom:14px;padding:9px 13px;border:1px solid #fff8eb77;border-radius:999px;background:rgba(38,29,22,.38);color:#fff8eb;font:12px 'Trebuchet MS',sans-serif;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s,transform .2s}.motion-replay:hover{background:rgba(38,29,22,.66);transform:translateY(-2px)}
+.motion-dust{position:fixed;z-index:1;inset:0;overflow:hidden;pointer-events:none}.motion-dust i{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;background:#fff0c4;box-shadow:0 0 10px 2px rgba(255,226,167,.62);opacity:0;animation:dust-drift var(--duration) ease-in-out var(--delay) infinite}
+@keyframes room-settle{from{transform:scale(1.09);filter:brightness(.45) saturate(.6)}to{transform:scale(1.035);filter:brightness(.78) saturate(.88)}}@keyframes light-arrive{to{opacity:1}}@keyframes light-drift{from{transform:translateX(-3%)}to{transform:translateX(3%)}}@keyframes content-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes card-arrive{from{opacity:0;transform:translateY(28px) scale(.975);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@keyframes photo-pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}@keyframes dust-drift{0%{transform:translate3d(0,12px,0);opacity:0}25%{opacity:.75}75%{opacity:.36}100%{transform:translate3d(var(--drift),-76px,0);opacity:0}}
+.window-shutters{transition:opacity .5s ease 2.1s}.window-shutters.is-open{opacity:0}.window-shutter{transition:transform 2.15s cubic-bezier(.68,.02,.2,1),filter 2s ease}.window-shutters.is-open .window-shutter:first-child{transform:rotateY(-108deg);filter:brightness(.82)}.window-shutters.is-open .window-shutter:last-child{transform:rotateY(108deg);filter:brightness(.82)}
+@media(max-width:520px){body{padding:66px 14px 60px}body>h1{font-size:34px}body>p{max-width:31ch;font-size:13px;margin-bottom:13px}body>form{max-height:calc(100svh - 205px);padding:20px 17px}body>form input[type=text],body>form input[type=number],body>form input[type=email],body>form input[type=file]{min-height:43px}.ambient-brand{top:15px}.motion-replay{right:10px;bottom:8px}}
+@media(max-height:670px){body{padding-top:55px;padding-bottom:50px}body>h1{font-size:30px}body>p{margin-bottom:9px}body>form{max-height:calc(100svh - 178px);padding:14px 20px}.ambient-brand{top:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.window-shutters{display:none}.ambient-brand{opacity:1}}
+/* Keep the login screen fixed to one viewport instead of scrolling like a page. */
+html,body{width:100%;height:100%;min-height:0;overflow:hidden}
+body{height:100vh;height:100dvh;min-height:0;padding:58px 16px 50px;justify-content:center;gap:0}
+body>h1{margin:0 0 5px;font-size:clamp(29px,5vh,42px)}
+body>p{margin:0 0 10px;font-size:13px}
+body>form{flex:0 1 auto;max-height:calc(100dvh - 168px);overflow:hidden;width:min(100%,420px);padding:clamp(13px,2.1vh,22px) clamp(16px,4vw,27px)}
+body>form label{margin-bottom:4px;font-size:11px}
+body>form input[type=text],body>form input[type=number],body>form input[type=email]{min-height:39px;margin-bottom:3px}
+body>form span{min-height:14px;margin-bottom:2px;font-size:11px}
+body>form input[type=file]{min-height:36px;margin:3px 0;padding:7px 9px}
+#photo-preview{width:48px;height:48px;margin:2px 0}
+body>form input[type=submit]{min-height:42px;margin-top:4px}
+.login-home{min-height:34px;margin-top:7px;padding:6px 12px;font-size:11px}
+@media(max-width:520px){body{padding:53px 12px 46px}body>h1{font-size:30px}body>p{margin-bottom:8px;font-size:12px}body>form{width:min(100%,390px);max-height:calc(100dvh - 151px);padding:13px 15px}.ambient-brand{top:10px}.motion-replay{bottom:6px}}
+@media(max-height:560px){body{padding-top:43px;padding-bottom:37px}body>h1{font-size:25px}body>p{font-size:11px;margin-bottom:5px}body>form{max-height:calc(100dvh - 118px);padding:9px 16px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{min-height:33px}body>form input[type=file]{min-height:30px;padding:4px 8px}#photo-preview{width:36px;height:36px}.login-home{min-height:27px;margin-top:3px;padding:3px 10px}}
+/* One-screen composition: show every field and action together without an inner scroll area. */
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;height:100vh;height:100dvh;min-height:0;overflow:hidden;padding:52px 14px 48px}
+body>h1{flex:0 0 auto;margin:0 0 4px;font-size:clamp(26px,4.4vh,38px);line-height:1.05}
+body>p{flex:0 0 auto;margin:0 0 9px;font-size:clamp(11px,1.8vh,13px);line-height:1.35}
+body>form{flex:0 1 auto;min-height:0;max-height:calc(100dvh - 148px);overflow:visible;width:min(100%,410px);padding:clamp(12px,2vh,19px) clamp(15px,3vw,23px)}
+body>form br{display:none}
+body>form label{margin:0 0 3px;font-size:11px;line-height:1.2}
+body>form input[type=text],body>form input[type=number],body>form input[type=email]{display:block;min-height:37px;height:37px;margin:0 0 1px;padding:0 11px;font-size:14px}
+body>form span{min-height:14px;margin:0 0 2px;font-size:10px;line-height:1.2}
+body>form label[for=photo]{margin-top:2px}
+body>form input[type=file]{display:block;min-height:32px;height:34px;margin:2px 0 3px;padding:6px 8px;font-size:11px}
+#photo-preview{display:block;width:42px;height:42px;margin:2px auto 3px}
+body>form input[type=submit]{display:block;min-height:40px;height:40px;margin:4px 0 0;padding:0 14px}
+.login-home{flex:0 0 auto;min-height:30px;margin-top:5px;padding:5px 12px;font-size:10px}
+@media(max-height:650px){body{padding-top:43px;padding-bottom:39px}body>h1{font-size:26px;margin-bottom:2px}body>p{margin-bottom:5px}body>form{max-height:calc(100dvh - 122px);padding:9px 15px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:32px;min-height:32px}body>form span{min-height:12px}body>form input[type=file]{height:29px;min-height:28px;padding:3px 7px}#photo-preview{width:34px;height:34px}body>form input[type=submit]{height:35px;min-height:35px;margin-top:2px}.login-home{min-height:25px;margin-top:2px;padding:3px 10px}}
+@media(max-width:380px){body{padding-inline:9px}body>form{width:100%;padding-inline:13px}.ambient-brand{left:12px}.motion-replay{right:8px}}
+/* Slightly roomier login card while preserving the one-screen layout. */
+body>form{width:min(100%,440px);padding:clamp(15px,2.4vh,23px) clamp(18px,3.5vw,27px)}
+body>h1{font-size:clamp(28px,4.8vh,41px)}
+body>p{font-size:clamp(12px,1.9vh,14px);margin-bottom:11px}
+body>form label{font-size:12px;margin-bottom:4px}
+body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:41px;min-height:41px;font-size:15px;padding-inline:12px}
+body>form span{min-height:16px;font-size:11px}
+body>form input[type=file]{height:37px;min-height:36px;font-size:12px}
+#photo-preview{width:48px;height:48px}
+body>form input[type=submit]{height:44px;min-height:44px;font-size:15px}
+.login-home{min-height:33px;font-size:11px}
+@media(max-height:650px){body>form{padding:11px 17px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:35px;min-height:35px}body>form input[type=file]{height:31px;min-height:31px}#photo-preview{width:38px;height:38px}body>form input[type=submit]{height:38px;min-height:38px}}
+/* Screenshot polish: never show the empty image placeholder and keep every control in view. */
+#photo-preview[hidden]{display:none!important}
+body>form{width:min(100%,450px);padding:clamp(16px,2.6vh,24px) clamp(19px,3.8vw,30px);border-radius:22px;background:rgba(250,247,241,.91);box-shadow:0 28px 90px rgba(24,18,13,.36),inset 0 1px 0 #fff}
+body>h1{text-shadow:0 3px 24px rgba(20,15,10,.66);letter-spacing:-.045em}
+body>p{font-weight:500;text-shadow:0 2px 14px rgba(20,15,10,.66)}
+body>form input[type=text],body>form input[type=number],body>form input[type=email]{border-color:#d8d0c6;background:#fffefa}
+body>form input[type=file]{border-color:#ded6cc;background:rgba(255,255,255,.8);border-radius:9px}
+#photo-preview:not([hidden]){display:block;width:50px;height:50px;margin:3px auto 4px;border:3px solid #fff;border-radius:50%;object-fit:cover;box-shadow:0 4px 14px rgba(58,43,31,.2)}
+@media(max-height:520px){body{padding-top:39px;padding-bottom:34px}body>h1{font-size:24px}body>p{font-size:10px;margin-bottom:4px}body>form{padding:8px 14px}body>form label{font-size:10px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:29px;min-height:29px}body>form span{min-height:10px;font-size:9px}body>form input[type=file]{height:25px;min-height:25px;padding:2px 6px}#photo-preview:not([hidden]){width:27px;height:27px;margin:1px auto}body>form input[type=submit]{height:31px;min-height:31px;margin-top:1px}.login-home{min-height:22px;margin-top:1px;padding:2px 8px;font-size:9px}.ambient-brand{top:7px}.motion-replay{bottom:4px;padding:6px 9px;font-size:10px}}
+/* Slightly taller, narrower login card. */
+body>form{width:min(100%,420px);padding:clamp(22px,3vh,30px) clamp(20px,3vw,26px)}
+body>form label{margin-bottom:5px}
+body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:44px;min-height:44px;margin-bottom:3px}
+body>form span{min-height:17px;margin-bottom:3px}
+body>form input[type=file]{height:40px;min-height:39px;margin-top:4px}
+#photo-preview:not([hidden]){width:54px;height:54px;margin:5px auto}
+body>form input[type=submit]{height:47px;min-height:47px;margin-top:6px}
+@media(max-height:650px){body>form{padding:12px 17px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:35px;min-height:35px}body>form input[type=file]{height:32px;min-height:32px}#photo-preview:not([hidden]){width:38px;height:38px;margin:2px auto}body>form input[type=submit]{height:38px;min-height:38px}}
+@media(max-height:520px){body>form{padding:8px 14px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:29px;min-height:29px}body>form input[type=file]{height:25px;min-height:25px}#photo-preview:not([hidden]){width:27px;height:27px;margin:1px auto}body>form input[type=submit]{height:31px;min-height:31px}}
+/* Final subtle size adjustment: slightly narrower with a touch more vertical breathing room. */
+body>form{width:min(100%,408px);padding:clamp(25px,3.3vh,33px) clamp(20px,3vw,26px)}
+body>form label{margin-bottom:6px}
+body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:46px;min-height:46px;margin-bottom:4px}
+body>form span{min-height:18px;margin-bottom:4px}
+body>form input[type=file]{height:42px;min-height:41px;margin-top:5px}
+#photo-preview:not([hidden]){width:56px;height:56px;margin:6px auto}
+body>form input[type=submit]{height:49px;min-height:49px;margin-top:7px}
+@media(max-height:650px){body>form{padding:12px 17px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:35px;min-height:35px}body>form input[type=file]{height:32px;min-height:32px}#photo-preview:not([hidden]){width:38px;height:38px;margin:2px auto}body>form input[type=submit]{height:38px;min-height:38px}}
+@media(max-height:520px){body>form{padding:8px 14px}body>form input[type=text],body>form input[type=number],body>form input[type=email]{height:29px;min-height:29px}body>form input[type=file]{height:25px;min-height:25px}#photo-preview:not([hidden]){width:27px;height:27px;margin:1px auto}body>form input[type=submit]{height:31px;min-height:31px}}
 </style>
 </head>
 <body>
+    <div class="ambient-brand" aria-hidden="true"><b>A</b> All Area Shop</div><div class="motion-dust" id="motion-dust" aria-hidden="true"></div><button type="button" class="motion-replay" id="motion-replay">↻ Replay reveal</button>
+  <div class="window-shutters" id="window-shutters" aria-hidden="true"><div class="window-shutter"></div><div class="window-shutter"></div></div>
     <h1>All Area Shop</h1>
     <p>Sign in to save your profile details</p>
     <form onsubmit= "return submitForm()">
@@ -129,17 +237,9 @@ form input[type=submit]:hover{background:#765744}
         <label for="ma">E-mail:</label>
         <input type="email" id="ma" placeholder="Enter your E-mail"><br>
         <span id="s3"></span><br>
-        <label for="gender">Gender:</label>
-        <select id="gender" required><option value="">Choose your gender</option><option value="Woman">Woman</option><option value="Man">Man</option><option value="Non-binary">Non-binary</option><option value="Prefer not to say">Prefer not to say</option></select><br>
         <label for="photo">Profile photo:</label>
         <input type="file" id="photo" accept="image/*"><br>
-        <img id="photo-preview" alt="Profile photo preview" hidden><br>        <fieldset class="location-fields"><legend>Location details <span>(optional)</span></legend>
-          <label for="address">Street address</label><input id="address" type="text" autocomplete="street-address" placeholder="Street, building, apartment">
-          <label for="city">City / Town</label><input id="city" type="text" autocomplete="address-level2" placeholder="City or town">
-          <label for="region">State / Region</label><input id="region" type="text" autocomplete="address-level1" placeholder="State or region">
-          <label for="postal">Postal code</label><input id="postal" type="text" autocomplete="postal-code" placeholder="Postal code">
-          <label for="country">Country</label><input id="country" type="text" autocomplete="country-name" placeholder="Country">
-        </fieldset>
+        <img id="photo-preview" alt="Profile photo preview" hidden><br>
         <input type="submit">
     
     </form>
@@ -150,6 +250,30 @@ form input[type=submit]:hover{background:#765744}
     </table>
     
     <script>
+            // Add soft dust motes and let visitors replay the shutter reveal.
+      const motionDust = document.getElementById('motion-dust');
+      for (let i = 0; i < 24; i++) {
+        const mote = document.createElement('i');
+        mote.style.setProperty('--x', `${10 + Math.random() * 80}%`);
+        mote.style.setProperty('--y', `${25 + Math.random() * 65}%`);
+        mote.style.setProperty('--size', `${2 + Math.random() * 3}px`);
+        mote.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+        mote.style.setProperty('--delay', `${Math.random() * -12}s`);
+        mote.style.setProperty('--drift', `${-28 + Math.random() * 56}px`);
+        motionDust.appendChild(mote);
+      }
+      const replayReveal = () => {
+        const shutters = document.getElementById('window-shutters');
+        shutters.classList.remove('is-open');
+        shutters.style.opacity = '1';
+        window.setTimeout(() => shutters.classList.add('is-open'), 80);
+      };
+      document.getElementById('motion-replay').addEventListener('click', replayReveal);
+      // Open the wooden shutters shortly after the page appears.
+      const windowShutters = document.getElementById('window-shutters');
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.setTimeout(() => windowShutters.classList.add('is-open'), 900);
+      }
       let profilePhotoData = '';
       document.getElementById('photo').addEventListener('change', event => {
         const file = event.target.files?.[0];
@@ -173,15 +297,14 @@ form input[type=submit]:hover{background:#765744}
         reader.readAsDataURL(file);
       });
       function submitForm(){
-        const name=document.getElementById('na').value.trim(), phone=document.getElementById('nu').value.trim(), email=document.getElementById('ma').value.trim(), gender=document.getElementById('gender').value;
-        const address=document.getElementById('address').value.trim(), city=document.getElementById('city').value.trim(), region=document.getElementById('region').value.trim(), postal=document.getElementById('postal').value.trim(), country=document.getElementById('country').value.trim();
+        const name=document.getElementById('na').value.trim(), phone=document.getElementById('nu').value.trim(), email=document.getElementById('ma').value.trim();
         document.getElementById('s1').textContent=name?'':'Please enter your name';
         document.getElementById('s2').textContent=phone&&/^\d{7,15}$/.test(phone)?'':'Enter a valid phone number';
         document.getElementById('s3').textContent=email?'':'Please enter your email';
-        if(!name||!phone||!/^\d{7,15}$/.test(phone)||!email||!gender)return false;
-        const profile={name,phone,email,gender,photo:profilePhotoData,address,city,region,postal,country};
+        if(!name||!phone||!/^\d{7,15}$/.test(phone)||!email)return false;
+        const profile={name,phone,email,photo:profilePhotoData};
         try{localStorage.setItem('allAreaShopProfile',JSON.stringify(profile));}catch(error){}
-        const handoff=new URLSearchParams({name,phone,email,gender,photo:profilePhotoData,address,city,region,postal,country}).toString();
+        const handoff=new URLSearchParams({name,phone,email,photo:profilePhotoData}).toString();
         window.location.href=`profile.html#profile?${handoff}`;
         return false;
       }
@@ -189,3 +312,11 @@ form input[type=submit]:hover{background:#765744}
     
 </body>
 </html>
+
+
+
+
+
+
+
+
