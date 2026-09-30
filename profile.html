@@ -1,514 +1,101 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Your Profile | All Area Shop</title>
-    <style>
-      :root {
-        --ink: #28241f;
-        --muted: #777168;
-        --navy: #35445b;
-        --line: #e8e3da;
-        --paper: #f7f5f0;
-        --card: #fffdfa;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
-        font:
-          15px/1.5 Arial,
-          sans-serif;
-      }
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 16px clamp(20px, 5vw, 72px);
-        border-bottom: 1px solid #41392f19;
-        background: #fffdfae0;
-        backdrop-filter: blur(18px);
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 11px;
-        color: var(--navy);
-        text-decoration: none;
-        font:
-          28px Georgia,
-          serif;
-      }
-      .mark {
-        display: grid;
-        place-items: center;
-        width: 38px;
-        height: 38px;
-        border-radius: 9px;
-        background: white;
-        color: var(--navy);
-        font:
-          bold 13px/1 Georgia,
-          serif;
-      }
-      .back {
-        color: var(--navy);
-        font-weight: 700;
-        text-decoration: none;
-      }
-      .mini-nav {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .mini-nav a {
-        white-space: nowrap;
-      }
-      .mini-nav a {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--navy);
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: 700;
-      }
-      .mini-nav svg {
-        width: 15px;
-        height: 15px;
-      }
-      .mini-avatar {
-        width: 24px;
-        height: 24px;
-        border: 1px solid #fff;
-        border-radius: 50%;
-        object-fit: cover;
-        box-shadow: 0 2px 8px #26354b22;
-      }
-      .mini-avatar[hidden] {
-        display: none;
-      }
-      .page {
-        width: min(1040px, 100%);
-        min-height: 75vh;
-        margin: auto;
-        padding: clamp(48px, 7vw, 82px) clamp(20px, 5vw, 72px) 90px;
-      }
-      .eyebrow {
-        color: #a9533d;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-      }
-      h1 {
-        margin: 12px 0;
-        color: var(--ink);
-        font:
-          500 clamp(36px, 5vw, 56px)/1.05 Georgia,
-          serif;
-        letter-spacing: -0.04em;
-      }
-      .intro {
-        margin: 0 0 30px;
-        color: var(--muted);
-      }
-      .card {
-        max-width: 760px;
-        padding: clamp(22px, 4vw, 38px);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: var(--card);
-        box-shadow: 0 8px 24px #25221c0d;
-      }
-      .identity {
-        display: flex;
-        align-items: flex-start;
-        gap: 22px;
-      }
-      .avatar {
-        width: 112px;
-        height: 112px;
-        flex: none;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid white;
-        box-shadow: 0 5px 18px #242d3c26;
-      }
-      .avatar[hidden] {
-        display: none;
-      }
-      .fields {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        flex: 1;
-      }
-      .field {
-        padding: 15px;
-        border-radius: 10px;
-        background: #f5f2ec;
-        overflow-wrap: anywhere;
-      }
-      .field span {
-        display: block;
-        margin-bottom: 7px;
-        color: #8b8174;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-      .field strong {
-        color: var(--navy);
-        font-size: 15px;
-      }
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 22px;
-      }
-      .actions a,
-      .actions button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 44px;
-        padding: 0 17px;
-        border: 0;
-        border-radius: 9px;
-        background: var(--navy);
-        color: white;
-        text-decoration: none;
-        font:
-          600 14px Arial,
-          sans-serif;
-        cursor: pointer;
-      }
-      .actions .secondary {
-        background: #ebe7df;
-        color: var(--navy);
-      }
-      .empty {
-        padding: 26px;
-        border: 1px dashed #d6cdc2;
-        border-radius: 12px;
-        color: var(--muted);
-        text-align: center;
-      }
-      footer {
-        padding: 22px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 12px;
-      }
-      @media (max-width: 620px) {
-        .identity {
-          flex-direction: column;
-          align-items: center;
-        }
-        .fields {
-          width: 100%;
-          grid-template-columns: 1fr;
-        }
-        .brand {
-          font-size: 24px;
-        }
-      }
-      .mini-nav a {
-        position: relative;
-        perspective: 500px;
-        transition:
-          transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
-          color 0.25s ease;
-      }
-      .mini-nav a svg,
-      .mini-nav a img {
-        transition:
-          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-          filter 0.3s ease;
-      }
-      .mini-nav a:focus-visible {
-        outline: 2px solid #a96b4f;
-        outline-offset: 4px;
-        border-radius: 8px;
-      }
-      @media (hover: hover) {
-        .mini-nav a:hover {
-          transform: translateY(-2px) rotateX(4deg);
-          color: #a9533d;
-        }
-        .mini-nav a:hover svg,
-        .mini-nav a:hover img {
-          transform: translateZ(7px) scale(1.1);
-          filter: drop-shadow(0 3px 3px rgba(38, 49, 65, 0.2));
-        }
-        .mini-nav a:active {
-          transform: translateY(0) scale(0.97);
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .mini-nav a,
-        .mini-nav a svg,
-        .mini-nav a img {
-          transition: none !important;
-          transform: none !important;
-        }
-      }
-      /* Match the warm taupe glass navbar palette */
-      .topbar {
-        background: rgba(184, 160, 149, 0.9);
-        border-bottom-color: rgba(82, 62, 52, 0.16);
-        box-shadow: 0 8px 24px rgba(77, 57, 48, 0.12);
-      }
-      .brand,
-      .mini-nav a {
-        color: #493831;
-      }
-      .mini-nav a:hover {
-        color: #754e3d;
-      }
-      .mark {
-        color: #493831;
-        background: rgba(255, 253, 250, 0.88);
-        box-shadow: 0 4px 14px rgba(77, 57, 48, 0.12);
-      }
-      .mark {
-        background: rgba(184, 160, 149, 0.88);
-        box-shadow: 0 3px 12px rgba(77, 57, 48, 0.16);
-      }
-      .topbar {
-        background: rgba(184, 160, 149, 0.9);
-      }
-      /* Match the shop's premium espresso and ivory glass navbar */
-      .topbar {
-        background: rgba(48, 40, 36, 0.94);
-        border-bottom-color: rgba(238, 213, 190, 0.22);
-        box-shadow: 0 10px 28px rgba(34, 27, 23, 0.2);
-      }
-      .brand,
-      .mini-nav a {
-        color: #fff4e8;
-      }
-      .brand:hover,
-      .mini-nav a:hover {
-        color: #e2bd91;
-      }
-      .mark {
-        background: rgba(250, 240, 229, 0.94);
-        color: #46342a;
-        box-shadow: 0 3px 14px rgba(20, 16, 14, 0.2);
-      }
-      .mini-nav a:focus-visible {
-        outline-color: #e2bd91;
-      }
-      /* Keep profile navbar interaction flat: 2D feedback only */
-      .mini-nav a {
-        perspective: none !important;
-      }
-      .mini-nav a:hover {
-        transform: translateY(-1px) !important;
-      }
-      .mini-nav a:hover svg,
-      .mini-nav a:hover img {
-        transform: scale(1.06) !important;
-      }
-      .mini-nav a:active {
-        transform: scale(0.98) !important;
-      }
-      /* Preserve navbar colors during hover and click */
-      .mini-nav a:hover,
-      .mini-nav a:focus-visible,
-      .mini-nav a:active {
-        color: #fff4e8 !important;
-      }
-      .mini-nav #nav-user {
-        display: none !important;
-      }
-    /* Phone-first account page layout */
-:root{--ink:#302824;--muted:#74675f;--navy:#59483f;--line:#e3d8ce;--paper:#f3eee8;--card:#fffdf9}
-html,body{background:var(--paper)}
-.topbar{background:rgba(63,51,45,.96)!important;border-bottom-color:rgba(239,221,207,.24)!important;backdrop-filter:blur(18px)}
-.brand,.mini-nav a{color:#fff6ee!important}.mark{background:#e8d9ce!important;color:#59483f!important}
-.page{color:var(--ink)}.card{background:var(--card);border-color:var(--line)}
-.field{background:#f7f2ed!important}.field strong{color:#59483f!important}
-.actions a,.actions button{background:#59483f!important;color:#fffaf5!important}
-@media(max-width:600px){
-  .topbar{position:sticky;top:0;z-index:20;flex-wrap:wrap;justify-content:center;gap:9px;padding:9px 12px}
-  .brand{justify-content:center;gap:8px;font-size:clamp(21px,6vw,25px)!important}
-  .mark{width:34px;height:34px;font-size:12px!important}
-  .mini-nav{width:100%;max-width:100%;justify-content:flex-start;gap:4px;overflow-x:auto;padding:5px;border:1px solid rgba(255,245,235,.2);border-radius:12px;background:rgba(255,245,235,.1);scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .mini-nav::-webkit-scrollbar{display:none}
-  .mini-nav a{flex:0 0 auto;min-height:36px;padding:0 11px;border-radius:9px;font-size:11px!important}
-  .mini-nav a:hover,.mini-nav a:focus-visible{background:rgba(255,241,225,.16)}
-  .page{width:100%;min-height:calc(100svh - 100px);padding:34px 14px 48px}
-  h1{font-size:clamp(34px,10vw,44px)!important;line-height:1.04}
-  .intro{margin-bottom:20px;font-size:14px;line-height:1.6}
-  .card{width:100%;padding:18px;border-radius:15px}
-  .identity{gap:16px}
-  .avatar{width:88px;height:88px}
-  .fields{grid-template-columns:1fr!important;gap:9px}
-  .field{padding:13px;border-radius:10px}
-  .field strong{font-size:14px}
-  .actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
-  .actions a,.actions button{min-height:46px;padding-inline:10px}
-  .empty{padding:20px 14px;line-height:1.6}
-  footer{padding:18px 14px calc(18px + env(safe-area-inset-bottom))}
-}
-@media(max-width:360px){.mini-nav a{padding-inline:9px;font-size:10px!important}.actions{grid-template-columns:1fr}}
-</style>
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="brand" href="https://aashop-c1pql70il-ajith735897-1974.vercel.app/"
-        ><span class="mark">A A<br />A S</span><span>All Area Shop</span></a
-      >
-      <nav class="mini-nav" aria-label="Shop navigation">
-        <a href="https://aashop-seven.vercel.app/"
-          ><svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-          >
-            <path d="https://aashop-seven.vercel.app/" /></svg
-          >Home</a
-        ><a href="https://aashop-5yo8h7oct-ajith735897-1974.vercel.app/#products">Products</a
-        ><a href="cart.html">Cart</a
-        ><a href="profile.html" aria-label="Your profile"
-          ><img class="mini-avatar" id="nav-photo" alt="" hidden /><svg
-            id="nav-user"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-          >
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 21a8 8 0 0 1 16 0" /></svg
-          >Profile</a
-        >
-      </nav>
-    </header>
-    <main class="page">
-      <span class="eyebrow">YOUR ACCOUNT</span>
-      <h1>Your profile</h1>
-      <p class="intro" id="message">Your saved account details appear here.</p>
-      <section class="card">
-        <div id="signed-out" class="empty" hidden>
-          You are not logged in yet. <a href="https://aashop-l5ncpsxo5-ajith735897-1974.vercel.app/Frontend%20login.html">Log in to your account</a> to
-          view your profile.
-        </div>
-        <div id="signed-in" hidden>
-          <div class="identity">
-            <img class="avatar" id="photo" alt="Profile photo" hidden />
-            <div class="fields">
-              <div class="field"><span>Name</span><strong id="name"></strong></div>
-              <div class="field"><span>Phone</span><strong id="phone"></strong></div>
-              <div class="field"><span>Email</span><strong id="email"></strong></div>
-              <div class="field"><span>Gender</span><strong id="gender"></strong></div>
-              <div class="field"><span>Street address</span><strong id="address"></strong></div>
-              <div class="field"><span>City / Town</span><strong id="city"></strong></div>
-              <div class="field"><span>State / Region</span><strong id="region"></strong></div>
-              <div class="field"><span>Postal code</span><strong id="postal"></strong></div>
-              <div class="field"><span>Country</span><strong id="country"></strong></div>
-            </div>
-          </div>
-          <div class="actions">
-            <a href="https://aashop-l5ncpsxo5-ajith735897-1974.vercel.app/Frontend%20login.html">Edit details</a
-            ><button type="button" class="secondary" id="logout">Log out</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4eee7">
+  <title>Your Profile | All Area Shop</title>
+  <style>
+    :root{--ink:#302923;--muted:#777067;--accent:#77563d;--line:#e8dfd5;--paper:#f5f0e9;--card:#fffdf9}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 4%,#e4d6c8 0,transparent 34%),radial-gradient(ellipse at 92% 95%,#d9dfd7 0,transparent 35%),var(--paper);color:var(--ink);font:15px/1.55 Arial,sans-serif}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px clamp(18px,5vw,68px);border-bottom:1px solid #49372a1a;background:#fffdf9d9;backdrop-filter:blur(14px)}
+    .brand{display:flex;align-items:center;gap:10px;color:#344250;text-decoration:none;font:26px Georgia,serif}.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#fff;color:#77563d;font:bold 14px Georgia,serif;box-shadow:0 3px 12px #392b2014}
+    .back{color:#59483f;font-weight:700;text-decoration:none}.back:hover,.actions a:hover{text-decoration:underline;text-underline-offset:3px}
+    main{width:min(850px,100%);margin:0 auto;padding:clamp(42px,8vw,78px) 20px 68px}
+    .eyebrow{margin:0;color:#a05f43;font-size:11px;font-weight:700;letter-spacing:.19em;text-transform:uppercase}
+    h1{margin:10px 0 8px;font:500 clamp(38px,7vw,58px)/1.02 Georgia,serif;letter-spacing:-.045em}
+    .intro{margin:0 0 25px;color:var(--muted)}
+    .card{padding:clamp(22px,5vw,38px);border:1px solid #fff;border-radius:20px;background:#fffdf9e8;box-shadow:0 20px 58px #38291c16,inset 0 1px #fff;backdrop-filter:blur(14px)}
+    .empty{padding:22px;border:1px dashed #d9cfc4;border-radius:13px;color:var(--muted);text-align:center}.empty a{color:var(--accent);font-weight:700}
+    .identity{display:flex;align-items:flex-start;gap:24px}.avatar{width:104px;height:104px;flex:none;border:4px solid white;border-radius:50%;object-fit:cover;box-shadow:0 5px 20px #392b2022}.avatar[hidden]{display:none}
+    .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}.field{min-width:0;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#f8f4ee}.field span{display:block;margin-bottom:4px;color:#877c70;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}.field strong{display:block;overflow-wrap:anywhere;font-size:14px;font-weight:600}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:23px}.actions a,.actions button{min-height:43px;padding:10px 16px;border:1px solid var(--accent);border-radius:9px;background:var(--accent);color:#fffaf4;font:700 13px Arial,sans-serif;text-decoration:none;cursor:pointer}.actions .secondary{border-color:#ded3c8;background:#f7f2ed;color:#59483f}.actions a:hover,.actions button:hover{filter:brightness(1.08)}
+    footer{padding:18px;text-align:center;color:#847b72;font-size:12px}
+    [hidden]{display:none!important}
+    @media(max-width:600px){.topbar{padding:13px 16px}.brand{font-size:21px}.brand .mark{width:32px;height:32px}.back{font-size:12px}main{padding-top:38px}.identity{flex-direction:column;align-items:center;gap:16px}.fields{grid-template-columns:1fr}.avatar{width:88px;height:88px}.field{padding:11px 13px}.actions>*{flex:1;text-align:center}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="AA_shop_responsive_media_queries.html"><span class="mark">AA</span> All Area Shop</a>
+    <a class="back" href="AA_shop_responsive_media_queries.html">← Back to the shop</a>
+  </header>
+  <main>
+    <p class="eyebrow">Your account</p>
+    <h1>Profile</h1>
+    <p class="intro" id="message">Your saved account details appear here.</p>
+    <section class="card">
+      <div id="signed-out" class="empty" hidden>You are not logged in yet. <a href="Frontend%20login.html">Log in to your account</a> to view your profile.</div>
+      <div id="signed-in" hidden>
+        <div class="identity">
+          <img class="avatar" id="photo" alt="Profile photo" hidden>
+          <div class="fields">
+            <div class="field"><span>Name</span><strong id="name"></strong></div>
+            <div class="field"><span>Phone</span><strong id="phone"></strong></div>
+            <div class="field"><span>Email</span><strong id="email"></strong></div>
           </div>
         </div>
-      </section>
-    </main>
-    <footer>All Area Shop · Thoughtful finds for every corner.</footer>
-    <script>
-      (() => {
-        const key = "allAreaShopProfile";
-        let fromLogin = null;
+        <div class="actions">
+          <a href="Frontend%20login.html?edit=1">Edit details</a>
+          <button type="button" class="secondary" id="logout">Log out</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>All Area Shop · Thoughtful finds for every corner.</footer>
+  <script>
+    (() => {
+      const localKey = 'allAreaShopProfile';
+      const byId = id => document.getElementById(id);
+      const fromHash = () => {
         const match = location.hash.match(/^#profile\?(.*)$/);
-        if (match) {
-          const q = new URLSearchParams(match[1]);
-          fromLogin = {
-            name: q.get("name") || "",
-            phone: q.get("phone") || "",
-            email: q.get("email") || "",
-            gender: q.get("gender") || "",
-            photo: q.get("photo") || "",
-            address: q.get("address") || "",
-            city: q.get("city") || "",
-            region: q.get("region") || "",
-            postal: q.get("postal") || "",
-            country: q.get("country") || "",
-          };
-          try {
-            localStorage.setItem(key, JSON.stringify(fromLogin));
-          } catch {}
-          try {
-            history.replaceState(null, "", location.pathname);
-          } catch {}
+        if (!match) return null;
+        const params = new URLSearchParams(match[1]);
+        return {name:params.get('name')||'',phone:params.get('phone')||'',email:params.get('email')||'',photo:params.get('photo')||''};
+      };
+      const render = profile => {
+        byId('signed-out').hidden = Boolean(profile);
+        byId('signed-in').hidden = !profile;
+        byId('message').textContent = profile ? 'Your details are saved securely to your account.' : 'Sign in to view your saved account details.';
+        if (!profile) { byId('photo').hidden = true; return; }
+        for (const field of ['name','phone','email']) byId(field).textContent = profile[field] || '';
+        const photo = profile.photo || '';
+        byId('photo').hidden = !photo;
+        if (photo) byId('photo').src = photo;
+        try { localStorage.setItem(localKey, JSON.stringify(profile)); } catch {}
+      };
+      const load = async () => {
+        const handoff = fromHash();
+        if (handoff) {
+          try { localStorage.setItem(localKey, JSON.stringify(handoff)); } catch {}
+          history.replaceState(null, '', location.pathname + location.search);
         }
-        function render() {
-          let profile = fromLogin,
-            available = true;
-          try {
-            profile = JSON.parse(localStorage.getItem(key) || "null") || fromLogin;
-          } catch {
-            available = false;
-          }
-          document.getElementById("signed-out").hidden = Boolean(profile);
-          document.getElementById("signed-in").hidden = !profile;
-          if (!profile) {
-            document.getElementById("nav-photo").hidden = true;
-            document.getElementById("nav-user").hidden = false;
-            document.getElementById("nav-profile-text").hidden = false;
-            document.getElementById("message").textContent = available
-              ? "Your saved account details appear here."
-              : "Profile storage is unavailable in this browser.";
-            return;
-          }
-          document.getElementById("name").textContent = profile.name || "";
-          document.getElementById("phone").textContent = profile.phone || "";
-          document.getElementById("email").textContent = profile.email || "";
-          document.getElementById("gender").textContent = profile.gender || "Not provided";
-          for (const field of ["address", "city", "region", "postal", "country"])
-            document.getElementById(field).textContent = profile[field] || "Not provided";
-          const navPhoto = document.getElementById("nav-photo"),
-            navUser = document.getElementById("nav-user");
-          navPhoto.hidden = !profile.photo;
-          navUser.hidden = Boolean(profile.photo);
-          if (profile.photo) navPhoto.src = profile.photo;
-          const img = document.getElementById("photo");
-          img.hidden = !profile.photo;
-          if (profile.photo) img.src = profile.photo;
-          document.getElementById("message").textContent = available
-            ? "Your details are saved on this device."
-            : "Your details are available for this visit; browser storage is unavailable.";
-        }
-        render();
-        document.getElementById("logout").addEventListener("click", () => {
-          fromLogin = null;
-          try {
-            localStorage.removeItem(key);
-          } catch {}
-          render();
-        });
-        window.addEventListener("storage", (e) => {
-          if (e.key === key) {
-            fromLogin = null;
-            render();
-          }
-        });
-      })();
-    </script>
-  </body>
+        try {
+          const response = await fetch('/api/profile', {headers:{Accept:'application/json'}});
+          if (response.ok) { const data = await response.json(); render(data.profile); return; }
+        } catch {}
+        let saved = handoff;
+        try { saved = saved || JSON.parse(localStorage.getItem(localKey) || 'null'); } catch {}
+        render(saved);
+      };
+      byId('logout').addEventListener('click', async () => {
+        try { await fetch('/api/auth/logout', {method:'POST'}); } catch {}
+        try { localStorage.removeItem(localKey); } catch {}
+        render(null);
+      });
+      load();
+    })();
+  </script>
+</body>
 </html>
