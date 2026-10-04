@@ -387,14 +387,68 @@ html,body{background:var(--paper)}
 @media(max-width:360px){.cart-row{grid-template-columns:54px minmax(0,1fr);gap:8px}.cart-row img{width:54px;height:60px}.cart-controls{gap:5px}.cart-controls button,.cart-controls input{min-width:36px;min-height:38px}}
 @media(prefers-reduced-motion:reduce){.cart-summary .continue-shopping{transition:none}}
 </style>
-  </head>
+  <link rel="icon" href="../logo.png">
+<style id="logo-tile">
+.mark{display:flex!important;align-items:center;justify-content:center;width:auto!important;height:44px!important;padding:5px 11px!important;border:1px solid rgba(255,255,255,.6);border-radius:13px!important;background:linear-gradient(160deg,#fffaf3,#f1e6d8)!important;box-shadow:0 4px 14px rgba(40,28,20,.22),inset 0 1px #fff!important}
+.mark img{display:block;height:100%;width:auto}
+@media(max-width:600px){.mark{height:38px!important;padding:4px 9px!important}}
+</style>
+<style id="cart-motion">
+:root{--e:cubic-bezier(.2,.75,.2,1);--o:cubic-bezier(.3,1.5,.4,1)}
+body{background:radial-gradient(ellipse at 12% 6%,rgba(205,181,154,.38),transparent 42%),radial-gradient(ellipse at 92% 88%,rgba(150,120,95,.2),transparent 42%),#f7f3ec;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;width:46vmax;height:46vmax;border-radius:50%;pointer-events:none;animation:orb 18s ease-in-out infinite alternate}
+body:before{left:-14vmax;top:-12vmax;background:radial-gradient(circle,rgba(214,173,124,.3),transparent 65%)}
+body:after{right:-16vmax;bottom:-16vmax;background:radial-gradient(circle,rgba(120,150,190,.2),transparent 65%);animation-delay:-9s}
+@keyframes orb{to{transform:translate(6vmax,5vmax) scale(1.12)}}
+/* heading */
+.cart-page .eyebrow{display:inline-block;padding:7px 14px;border:1px solid #e0d2c3;border-radius:999px;background:rgba(255,253,249,.8);color:#8a6446;animation:rise .7s var(--e) both}
+.cart-page h1{margin:12px 0 6px;font:500 clamp(34px,6vw,56px)/1.04 Georgia,serif;letter-spacing:-.04em;color:#35445b;animation:wipe 1s var(--e) .1s both}
+.cart-page .intro{animation:rise .7s var(--e) .25s both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes wipe{from{opacity:0;clip-path:inset(0 100% 0 0);transform:translateX(-14px)}to{clip-path:inset(-10% -5%)}}
+/* item cards */
+.cart-row{position:relative;gap:15px;padding:15px;border-radius:18px;border-color:#eadfd3;background:linear-gradient(180deg,#fffefb,#fbf6ef);box-shadow:0 6px 18px rgba(80,58,42,.07);transition:transform .35s var(--e),box-shadow .35s,border-color .35s}
+.cart-row:hover{transform:translateY(-3px);border-color:#dcc6ae;box-shadow:0 16px 34px rgba(80,58,42,.14)}
+.cart-row img{width:84px;height:80px;border-radius:13px;box-shadow:0 5px 14px rgba(60,42,30,.18);transition:transform .5s var(--e)}
+.cart-row:hover img{transform:scale(1.07) rotate(-2deg)}
+.cart-row h2{margin:0 0 3px;font:500 18px/1.25 Georgia,serif;color:var(--ink)}
+.cart-row>strong{align-self:start;padding:6px 12px;border-radius:999px;background:#f3e8db;color:#59483f;font-size:15px;white-space:nowrap}
+.cart-items.enter .cart-row{animation:row-in .7s var(--e) both;animation-delay:calc(var(--i,0)*90ms + .3s)}
+@keyframes row-in{from{opacity:0;transform:translateX(-34px) scale(.97)}}
+.cart-row.leaving{animation:row-out .4s cubic-bezier(.6,0,.8,.4) forwards;pointer-events:none}
+@keyframes row-out{to{opacity:0;transform:translateX(70px) scale(.92) rotate(2deg)}}
+/* quantity controls */
+.cart-controls button,.cart-controls input{border-radius:10px;transition:transform .15s var(--o),background .2s,border-color .2s,box-shadow .2s}
+.cart-controls button:hover{border-color:#cfae8c;background:#f6ebdf}
+.cart-controls button:active{transform:scale(.88)}
+.cart-controls input:focus{outline:none;border-color:#c39458;box-shadow:0 0 0 3px rgba(195,148,88,.22)}
+.cart-controls input::-webkit-inner-spin-button{appearance:none}.cart-controls input{-moz-appearance:textfield}
+.cart-controls [data-action=remove]{padding:0 12px;border-color:transparent;background:transparent;color:#a0583f}
+.cart-controls [data-action=remove]:hover{background:#f9e4dc;border-color:#efc9bb}
+/* summary */
+.cart-summary{border:0;border-radius:20px;background:linear-gradient(#fffdf9,#fffdf9) padding-box,conic-gradient(from var(--a,0deg),#efe2d2,#d6ad7c,#efe2d2 40%,#efe2d2) border-box;border:1.5px solid transparent;box-shadow:0 20px 48px rgba(80,58,42,.14);animation:rise .8s var(--e) .35s both,spin 8s linear infinite}
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin{to{--a:360deg}}
+.cart-summary .summary-total strong{font:500 26px Georgia,serif;color:#59483f}
+.cart-summary strong.bump{animation:bump .55s var(--o)}
+@keyframes bump{35%{transform:scale(1.25);color:#a0583f}}
+.cart-summary strong{display:inline-block;transform-origin:100% 50%}
+.cart-summary .continue-shopping{position:relative;overflow:hidden;background:linear-gradient(110deg,#59483f 0 40%,#8d6a43 50%,#59483f 60%) 100% 0/260% 100%;transition:background-position .7s,transform .25s,box-shadow .25s}
+.cart-summary .continue-shopping:hover{background-position:0 0;transform:translateY(-2px);box-shadow:0 12px 24px rgba(80,58,42,.28)}
+/* empty state */
+.cart-empty{padding:34px 20px 30px;border-radius:20px;border:1.5px dashed #d6c4b0;font-size:16px;animation:rise .8s var(--e) .3s both}
+.cart-empty:before{content:"";display:block;width:132px;height:110px;margin:0 auto 14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cg fill='none' stroke='%23b08968' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 12h14l11 52h56l10-38H28'/%3E%3Ccircle cx='42' cy='82' r='7' fill='%23f1e6d8'/%3E%3Ccircle cx='84' cy='82' r='7' fill='%23f1e6d8'/%3E%3C/g%3E%3Ccircle cx='60' cy='44' r='5' fill='%23d6ad7c'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 10px 10px rgba(120,86,60,.2));animation:cart-float 3.4s ease-in-out infinite}
+@keyframes cart-float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
   <body>
     <header class="topbar">
-      <a class="brand" href="https://aashop-c1pql70il-ajith735897-1974.vercel.app/"
-        ><span class="mark">A A<br />A S</span><span>All Area Shop</span></a
+      <a class="brand" href="../index.html"
+        ><span class="mark"><img src="../logo.png" alt="" width="708" height="452"></span><span>All Area Shop</span></a
       >
       <nav class="mini-nav" aria-label="Shop navigation">
-        <a href="https://aashop-c1pql70il-ajith735897-1974.vercel.app/"
+        <a href="../index.html"
           ><svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -402,9 +456,9 @@ html,body{background:var(--paper)}
             stroke="currentColor"
             stroke-width="1.8"
           >
-            <path d="https://aashop-c1pql70il-ajith735897-1974.vercel.app/" /></svg
+            <path d="../index.html" /></svg
           >Home</a
-        ><a href="https://aashop-5yo8h7oct-ajith735897-1974.vercel.app/#products">Products</a
+        ><a href="../index.html#products">Products</a
         ><a href="cart.html">Cart</a
         ><a href="profile.html" aria-label="Your profile"
           ><img class="mini-avatar" id="nav-photo" alt="" hidden /><svg
@@ -431,47 +485,42 @@ html,body{background:var(--paper)}
       <h2>Order summary</h2>
       <p><span>Items</span><strong id="cart-summary-count">0</strong></p>
       <p class="summary-total"><span>Subtotal</span><strong id="cart-subtotal">₹0</strong></p>
-      <a class="continue-shopping" href="AA_shop_responsive_media_queries.html#products">Continue shopping</a>
+      <a class="continue-shopping" href="../index.html#products">Continue shopping</a>
     </aside>
   </div>
 </main>
     <footer>All Area Shop · Thoughtful finds for every corner.</footer>
-    <script>
-      
+<script>
 (() => {
-  const storageKey = 'all-area-shop-cart-v1';
-  const list = document.getElementById('cart-items');
-  const itemCount = document.getElementById('cart-summary-count');
-  const subtotal = document.getElementById('cart-subtotal');
-  const escapeText = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const money = value => `₹${Number(value || 0).toLocaleString('en-IN', {maximumFractionDigits:2})}`;
-  let cart = [];
-  try { const saved = JSON.parse(localStorage.getItem(storageKey) || '[]'); if (Array.isArray(saved)) cart = saved; } catch {}
-  const save = () => { try { localStorage.setItem(storageKey, JSON.stringify(cart)); } catch {} };
-  const render = () => {
-    const count = cart.reduce((sum, item) => sum + Math.max(0, Number(item.quantity) || 0), 0);
-    const total = cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0), 0);
-    itemCount.textContent = count;
-    subtotal.textContent = money(total);
-    if (!cart.length) { list.innerHTML = '<div class="cart-empty"><strong>Your cart is empty.</strong><br>Choose a product and add it to your cart to see it here.</div>'; return; }
-    list.innerHTML = cart.map(item => `<article class="cart-row" data-cart-item="${escapeText(item.id)}"><img src="${escapeText(item.image)}" alt="" loading="lazy"><div><h3>${escapeText(item.name)}</h3><p>${money(item.price)} each</p><div class="cart-controls"><button type="button" data-action="minus" aria-label="Decrease quantity">−</button><input type="number" min="1" step="1" value="${Math.max(1, Number(item.quantity) || 1)}" data-quantity aria-label="Quantity for ${escapeText(item.name)}"><button type="button" data-action="plus" aria-label="Increase quantity">+</button><button type="button" class="cart-remove" data-action="remove">Remove</button></div></div><strong class="cart-row-total">${money((Number(item.price)||0)*(Number(item.quantity)||0))}</strong></article>`).join('');
-  };
-  list.addEventListener('click', event => {
-    const button = event.target.closest('button[data-action]'); if (!button) return;
-    const row = button.closest('[data-cart-item]'); const item = cart.find(entry => entry.id === row?.dataset.cartItem); if (!item) return;
-    if (button.dataset.action === 'plus') item.quantity = (Number(item.quantity)||1)+1;
-    if (button.dataset.action === 'minus') item.quantity = Math.max(1,(Number(item.quantity)||1)-1);
-    if (button.dataset.action === 'remove') cart = cart.filter(entry => entry.id !== item.id);
-    save(); render();
-  });
-  list.addEventListener('change', event => {
-    const input = event.target.closest('input[data-quantity]'); if (!input) return;
-    const row = input.closest('[data-cart-item]'); const item = cart.find(entry => entry.id === row?.dataset.cartItem); if (!item) return;
-    item.quantity = Math.max(1,Math.floor(Number(input.value)||1)); save(); render();
-  });
-  window.addEventListener('storage', event => { if (event.key === storageKey) { try { cart = JSON.parse(event.newValue || '[]') || []; } catch { cart = []; } render(); } });
-  render();
+ const key='all-area-shop-cart-v1', host=document.getElementById('cart-items');
+ let cart=[]; try{cart=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(cart))cart=[]}catch{}
+ const money=n=>`₹${Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2})}`;
+ const save=()=>{try{localStorage.setItem(key,JSON.stringify(cart))}catch{};render()};
+ const render=()=>{const count=cart.reduce((s,i)=>s+(Number(i.quantity)||1),0),subtotal=cart.reduce((s,i)=>s+Number(i.price||0)*Number(i.quantity||1),0);document.getElementById('cart-summary-count').textContent=count;document.getElementById('cart-subtotal').textContent=money(subtotal);host.innerHTML=cart.length?cart.map((item,index)=>`<article class="cart-row"><img src="${item.image||''}" alt="" width="72"><div><h2>${item.name||'Product'}</h2><p>${money(item.price)} each</p><div class="cart-controls"><button type="button" data-action="minus" data-index="${index}">−</button><input type="number" min="1" value="${Math.max(1,Number(item.quantity)||1)}" data-action="quantity" data-index="${index}" aria-label="Quantity"><button type="button" data-action="plus" data-index="${index}">+</button><button type="button" data-action="remove" data-index="${index}">Remove</button></div></div><strong>${money(Number(item.price||0)*Number(item.quantity||1))}</strong></article>`).join(''):'<p class="cart-empty">Your cart is empty. Add products from the shop.</p>'};
+ host.addEventListener('click',event=>{const button=event.target.closest('button[data-action]');if(!button)return;const i=Number(button.dataset.index);if(button.dataset.action==='remove')cart.splice(i,1);if(button.dataset.action==='plus')cart[i].quantity=(Number(cart[i].quantity)||1)+1;if(button.dataset.action==='minus')cart[i].quantity=Math.max(1,(Number(cart[i].quantity)||1)-1);save()});
+ host.addEventListener('change',event=>{const input=event.target.closest('input[data-action="quantity"]');if(!input)return;cart[Number(input.dataset.index)].quantity=Math.max(1,Math.floor(Number(input.value)||1));save()});host.classList.add('enter');render();setTimeout(()=>host.classList.remove('enter'),1600);
 })();
 </script>
-  </body>
+      
+<script>
+(() => {
+  const host=document.getElementById('cart-items'), reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const index=()=>[...host.children].forEach((r,i)=>r.style.setProperty('--i',i));
+  index(); new MutationObserver(index).observe(host,{childList:true});
+  /* pulse the totals when they change */
+  ['cart-subtotal','cart-summary-count'].forEach(id=>{
+    const el=document.getElementById(id); let first=true;
+    new MutationObserver(()=>{ if(first){first=false;return} el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump') })
+      .observe(el,{childList:true,characterData:true,subtree:true});
+  });
+  /* slide a row away before it is removed */
+  host.addEventListener('click',e=>{
+    const b=e.target.closest('button[data-action="remove"]'); if(!b||reduce) return;
+    const row=b.closest('.cart-row'); if(!row||row.dataset.gone) return;
+    e.stopPropagation(); row.dataset.gone=1; row.classList.add('leaving');
+    setTimeout(()=>b.click(),380);
+  },true);
+})();
+</script>
+</body>
 </html>
